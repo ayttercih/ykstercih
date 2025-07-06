@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YKS Tercih Rehberi</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header.main-header {
+            background: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        header.main-header h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin: 0;
+        }
+        header.main-header p {
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 10px;
+        }
+        nav.main-nav {
+            background-color: #2c3e50;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        nav.main-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: 500;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        nav.main-nav a:hover {
+            background-color: #34495e;
+            border-radius: 4px;
+        }
+        .section-title {
+            font-size: 2em;
+            color: #2c3e50;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .city-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            text-decoration: none;
+            color: #333;
+            display: flex; /* Kart içeriğinin dikeyde hizalanması için */
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .city-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+        .city-card-content {
+            padding: 20px;
+            flex-grow: 1; /* içeriğin kartı doldurmasını sağlar */
+        }
+        .city-card h3 {
+            margin: 0 0 10px 0;
+            color: #34495e;
+            font-size: 1.5em;
+        }
+        .city-card p {
+            margin: 0;
+            font-size: 0.95em;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="main-header">
+            <h1>YKS Tercih Rehberi</h1>
+            <p>Üniversite hayalindeki şehri keşfet, geleceğine yön ver.</p>
+        </header>
+
+        <nav class="main-nav">
+            <a href="#">Şehir Rehberleri</a>
+            <a href="#" title="Yakında">Üniversiteler</a>
+            <a href="#" title="Yakında">Bölümler</a>
+            <a href="#" title="Yakında">Tercih Robotu</a>
+        </nav>
+
+        <h2 class="section-title">Şehirlere Göre Keşfet</h2>
+
+        <div class="city-grid">
+            
+            <a href="adana.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Adana</h3>
+                    <p>Akdeniz'in incisi, Çukurova'nın bereketli toprakları üzerinde kurulu dinamik bir sanayi ve tarım şehri.</p>
+                </div>
+            </a>
+            <a href="adiyaman.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Adıyaman</h3>
+                    <p>Tarihi ve kültürel zenginlikleriyle bilinen, sakin ve düzenli bir Güneydoğu Anadolu şehri.</p>
+                </div>
+            </a>
+            <a href="afyonkarahisar.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Afyonkarahisar</h3>
+                    <p>Mermerin, termalin ve lezzetin başkenti; Ege'nin kavşak noktasında bir öğrenci şehri.</p>
+                </div>
+            </a>
+            <a href="agri.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Ağrı</h3>
+                    <p>Türkiye'nin zirvesi Ağrı Dağı'nın eteğinde, tarihi İshak Paşa Sarayı'na ev sahipliği yapan kadim bir şehir.</p>
+                </div>
+            </a>
+            <a href="aksaray.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Aksaray</h3>
+                    <p>Ihlara Vadisi ve tarihi kervansaraylarıyla Kapadokya bölgesinin giriş kapısı.</p>
+                </div>
+            </a>
+            <a href="amasya.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Amasya</h3>
+                    <p>Yeşilırmak'ın iki yakasına kurulmuş, şehzadeler şehri olarak bilinen tarihi ve şirin bir kent.</p>
+                </div>
+            </a>
+            <a href="ankara.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Ankara</h3>
+                    <p>Türkiye'nin başkenti ve en köklü üniversitelerine ev sahipliği yapan memur ve öğrenci şehri.</p>
+                </div>
+            </a>
+            <a href="antalya.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Antalya</h3>
+                    <p>Turizmin başkenti, denizi, güneşi ve tarihi dokusuyla uluslararası bir öğrenci merkezi.</p>
+                </div>
+            </a>
+            <a href="ardahan.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Ardahan</h3>
+                    <p>Türkiye'nin en doğusunda, Çıldır Gölü ve kış turizmi potansiyeliyle bir serhat şehri.</p>
+                </div>
+            </a>
+            <a href="artvin.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Artvin</h3>
+                    <p>Doğu Karadeniz'in sarp yamaçlarında, eşsiz doğası ve yeşiliyle bir doğa harikası.</p>
+                </div>
+            </a>
+            <a href="aydin.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Aydın</h3>
+                    <p>Ege'nin verimli topraklarında, tarihi antik kentleri ve inciriyle meşhur bir tarım şehri.</p>
+                </div>
+            </a>
+            <a href="balikesir.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Balıkesir</h3>
+                    <p>Hem Marmara'ya hem de Ege'ye kıyısı olan, turizm ve tarımın birleştiği stratejik bir şehir.</p>
+                </div>
+            </a>
+            <a href="bartin.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Bartın</h3>
+                    <p>Amasra gibi tarihi bir tatil beldesine sahip, yeşil ve mavinin buluştuğu bir Batı Karadeniz şehri.</p>
+                </div>
+            </a>
+            <a href="batman.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Batman</h3>
+                    <p>Petrol rafinerisi ve Hasankeyf gibi tarihi değerleriyle Güneydoğu'nun gelişen bir şehri.</p>
+                </div>
+            </a>
+            <a href="bayburt.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Bayburt</h3>
+                    <p>Tarihi kalesi ve sakin atmosferiyle Doğu Karadeniz'in küçük ve şirin bir şehri.</p>
+                </div>
+            </a>
+            <a href="bilecik.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Bilecik</h3>
+                    <p>Osmanlı İmparatorluğu'nun doğduğu topraklar, tarihi ve sakin bir Marmara şehri.</p>
+                </div>
+            </a>
+            <a href="bingol.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Bingöl</h3>
+                    <p>Doğu Anadolu'nun doğal güzellikleri ve yüzen adaları ile bilinen gelişmekte olan bir şehir.</p>
+                </div>
+            </a>
+            <a href="bitlis.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Bitlis</h3>
+                    <p>Van Gölü'nün kıyısında, tarihi kalesi ve kendine özgü mimarisiyle dikkat çeken bir şehir.</p>
+                </div>
+            </a>
+            <a href="bolu.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Bolu</h3>
+                    <p>Türkiye'nin en önemli doğa ve milli parklarına ev sahipliği yapan, yeşilin her tonunu barındıran bir şehir.</p>
+                </div>
+            </a>
+            <a href="burdur.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Burdur</h3>
+                    <p>Göller Yöresi'nin sakin ve huzurlu şehri, tarihi Sagalassos antik kentiyle bilinir.</p>
+                </div>
+            </a>
+            <a href="bursa.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Bursa</h3>
+                    <p>Osmanlı'nın ilk başkenti, sanayisi, tarihi dokusu ve Uludağ'ı ile Türkiye'nin en büyük şehirlerinden.</p>
+                </div>
+            </a>
+            <a href="canakkale.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Çanakkale</h3>
+                    <p>Tarihin ve mitolojinin buluştuğu, Gelibolu Yarımadası ve Troya ile bir kahramanlık destanı.</p>
+                </div>
+            </a>
+            <a href="cankiri.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Çankırı</h3>
+                    <p>İç Anadolu'nun sakin ve tarihi dokusunu koruyan, tuz mağaralarıyla ünlü bir şehir.</p>
+                </div>
+            </a>
+            <a href="corum.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Çorum</h3>
+                    <p>Hitit medeniyetinin başkenti Hattuşa'ya ev sahipliği yapan, leblebisiyle meşhur bir Anadolu şehri.</p>
+                </div>
+            </a>
+            <a href="denizli.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Denizli</h3>
+                    <p>Pamukkale travertenleri ile dünyaca ünlü, tekstil ve sanayinin geliştiği bir Ege şehri.</p>
+                </div>
+            </a>
+            <a href="diyarbakir.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Diyarbakır</h3>
+                    <p>Tarihi surları ve zengin kültürel mirasıyla Güneydoğu'nun kalbi ve en büyük şehirlerinden.</p>
+                </div>
+            </a>
+            <a href="duzce.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Düzce</h3>
+                    <p>Batı Karadeniz'in yaylaları ve şelaleleri ile bir doğa turizmi merkezi.</p>
+                </div>
+            </a>
+            <a href="edirne.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Edirne</h3>
+                    <p>Osmanlı'ya başkentlik yapmış, Selimiye Camii gibi mimari şaheserlere ev sahipliği yapan bir sınır şehri.</p>
+                </div>
+            </a>
+            <a href="elazig.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Elazığ</h3>
+                    <p>Doğu Anadolu'nun gelişen şehirlerinden, Hazar Gölü ve zengin mutfağı ile bilinir.</p>
+                </div>
+            </a>
+            <a href="erzincan.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Erzincan</h3>
+                    <p>Fırat Nehri'nin kenarında, doğal güzellikleri ve bakır işlemeciliği ile tanınan bir şehir.</p>
+                </div>
+            </a>
+            <a href="erzurum.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Erzurum</h3>
+                    <p>Doğu'nun en büyük şehri, Palandöken Kayak Merkezi ve tarihi eserleriyle bir kış turizmi merkezi.</p>
+                </div>
+            </a>
+            <a href="eskisehir.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Eskişehir</h3>
+                    <p>Porsuk Çayı'nın etrafında şekillenen, modern ve canlı yapısıyla tam bir öğrenci şehri.</p>
+                </div>
+            </a>
+            <a href="gaziantep.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Gaziantep</h3>
+                    <p>UNESCO tarafından tescillenmiş mutfağı, tarihi dokusu ve sanayisiyle Güneydoğu'nun parlayan yıldızı.</p>
+                </div>
+            </a>
+            <a href="giresun.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Giresun</h3>
+                    <p>Fındığın başkenti, Doğu Karadeniz'in yeşil doğası ve Giresun Adası ile eşsiz bir sahil şehri.</p>
+                </div>
+            </a>
+            <a href="gumushane.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Gümüşhane</h3>
+                    <p>Doğal güzellikleri, Karaca Mağarası ve tarihi konakları ile sakin bir Karadeniz şehri.</p>
+                </div>
+            </a>
+            <a href="hakkari.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Hakkari</h3>
+                    <p>Türkiye'nin en güneydoğusunda, sarp dağları ve eşsiz coğrafyasıyla dikkat çeken bir şehir.</p>
+                </div>
+            </a>
+            <a href="hatay.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Hatay</h3>
+                    <p>Farklı medeniyetlerin ve dinlerin bir arada yaşadığı, zengin mutfağı ile ünlü bir medeniyetler beşiği.</p>
+                </div>
+            </a>
+            <a href="igdir.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Iğdır</h3>
+                    <p>Üç ülkeye sınırı olan, Ağrı Dağı'nın manzarasına sahip bir Doğu Anadolu şehri.</p>
+                </div>
+            </a>
+            <a href="isparta.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Isparta</h3>
+                    <p>Gülleri ve lavanta bahçeleriyle ünlü, Göller Yöresi'nin bir diğer önemli öğrenci şehri.</p>
+                </div>
+            </a>
+            <a href="istanbul.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>İstanbul</h3>
+                    <p>İki kıtayı birleştiren, tarihi, kültürel ve ekonomik zenginliğiyle Türkiye'nin en büyük metropolü.</p>
+                </div>
+            </a>
+            <a href="izmir.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>İzmir</h3>
+                    <p>Ege'nin incisi, sıcakkanlı insanları, canlı sosyal hayatı ve tarihi dokusuyla önemli bir liman kenti.</p>
+                </div>
+            </a>
+            <a href="kahramanmaras.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kahramanmaraş</h3>
+                    <p>Dondurması ve zengin mutfağı ile tanınan, edebiyat ve tarihle yoğrulmuş bir şehir.</p>
+                </div>
+            </a>
+            <a href="karabuk.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Karabük</h3>
+                    <p>Türkiye'nin ilk ağır sanayi tesislerine ev sahipliği yapan, Safranbolu ile bir turizm merkezi.</p>
+                </div>
+            </a>
+            <a href="karaman.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Karaman</h3>
+                    <p>Türkçenin başkenti olarak bilinen, tarihi ve kültürel zenginliklere sahip bir İç Anadolu şehri.</p>
+                </div>
+            </a>
+            <a href="kars.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kars</h3>
+                    <p>Baltık mimarisi, Ani Harabeleri ve kış turizmi ile Doğu Anadolu'nun en otantik şehirlerinden.</p>
+                </div>
+            </a>
+            <a href="kastamonu.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kastamonu</h3>
+                    <p>Tarihi konakları, Ilgaz Dağı ve Valla Kanyonu ile Batı Karadeniz'in kültürel ve doğal zenginliği.</p>
+                </div>
+            </a>
+            <a href="kayseri.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kayseri</h3>
+                    <p>Erciyes Dağı'nın eteğinde, gelişmiş sanayisi ve modern şehir yapısıyla İç Anadolu'nun ticaret merkezi.</p>
+                </div>
+            </a>
+            <a href="kilis.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kilis</h3>
+                    <p>Güneydoğu'nun kendine özgü mutfağı ve tarihi dokusuyla bir sınır şehri.</p>
+                </div>
+            </a>
+            <a href="kirikkale.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kırıkkale</h3>
+                    <p>Türkiye'nin önemli sanayi ve savunma sanayi tesislerine ev sahipliği yapan bir şehir.</p>
+                </div>
+            </a>
+            <a href="kirklareli.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kırklareli</h3>
+                    <p>Trakya'nın sakin ve yeşil şehri, longoz ormanları ve tarihi dokusuyla dikkat çeker.</p>
+                </div>
+            </a>
+            <a href="kirsehir.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kırşehir</h3>
+                    <p>Bozkırın ortasında, Ahi Evran ve Neşet Ertaş gibi değerleriyle bir kültür ve sanat şehri.</p>
+                </div>
+            </a>
+            <a href="kocaeli.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kocaeli</h3>
+                    <p>Türkiye'nin en önemli sanayi ve liman şehirlerinden, İstanbul'a yakınlığıyla stratejik bir konumda.</p>
+                </div>
+            </a>
+            <a href="konya.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Konya</h3>
+                    <p>Mevlana'nın şehri, geniş ovaları ve manevi atmosferiyle Türkiye'nin en büyük yüzölçümüne sahip ili.</p>
+                </div>
+            </a>
+            <a href="kutahya.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Kütahya</h3>
+                    <p>Çini sanatının başkenti, tarihi ve termal zenginlikleriyle bilinen bir Ege şehri.</p>
+                </div>
+            </a>
+            <a href="malatya.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Malatya</h3>
+                    <p>Kayısısıyla dünyaca ünlü, Doğu Anadolu'nun gelişen ve modernleşen şehirlerinden.</p>
+                </div>
+            </a>
+            <a href="manisa.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Manisa</h3>
+                    <p>Osmanlı şehzadelerinin yetiştiği, sanayisi ve tarımıyla Ege'nin önemli şehirlerinden.</p>
+                </div>
+            </a>
+            <a href="mardin.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Mardin</h3>
+                    <p>Taş evleri ve eşsiz mimarisiyle bir masal diyarı, farklı kültürlerin bir arada yaşadığı bir müze şehir.</p>
+                </div>
+            </a>
+            <a href="mersin.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Mersin</h3>
+                    <p>Akdeniz'in en büyük limanlarından birine sahip, palmiyelerle süslü caddeleri olan bir sahil şehri.</p>
+                </div>
+            </a>
+            <a href="mugla.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Muğla</h3>
+                    <p>Bodrum, Marmaris, Fethiye gibi dünyaca ünlü turizm merkezlerine ev sahipliği yapan bir tatil cenneti.</p>
+                </div>
+            </a>
+            <a href="mus.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Muş</h3>
+                    <p>Tarihi Malazgirt Ovası'na ev sahipliği yapan, Doğu Anadolu'nun sakin ve gelişmekte olan bir şehri.</p>
+                </div>
+            </a>
+            <a href="nevsehir.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Nevşehir</h3>
+                    <p>Kapadokya'nın kalbi, peri bacaları ve yeraltı şehirleriyle dünyanın dört bir yanından turist çeker.</p>
+                </div>
+            </a>
+            <a href="nigde.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Niğde</h3>
+                    <p>Aladağlar ve Bolkar Dağları'nın eteğinde, tarihi ve doğal güzellikleriyle bir İç Anadolu şehri.</p>
+                </div>
+            </a>
+            <a href="ordu.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Ordu</h3>
+                    <p>Karadeniz'in en güzel sahil şeritlerinden birine sahip, Boztepe'si ve yeşil doğasıyla bir huzur şehri.</p>
+                </div>
+            </a>
+            <a href="osmaniye.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Osmaniye</h3>
+                    <p>Çukurova'nın verimli topraklarında, yer fıstığı ve Karatepe-Aslantaş Açık Hava Müzesi ile tanınır.</p>
+                </div>
+            </a>
+            <a href="rize.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Rize</h3>
+                    <p>Çayın başkenti, yemyeşil yaylaları ve Kaçkar Dağları ile bir doğa sporları merkezi.</p>
+                </div>
+            </a>
+            <a href="sakarya.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Sakarya</h3>
+                    <p>Marmara Bölgesi'nin gelişen sanayi ve tarım şehri, Sapanca Gölü ile doğa turizmi sunar.</p>
+                </div>
+            </a>
+            <a href="samsun.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Samsun</h3>
+                    <p>Kurtuluş Savaşı'nın başladığı şehir, Karadeniz'in en büyük ve en modern liman kentlerinden.</p>
+                </div>
+            </a>
+            <a href="siirt.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Siirt</h3>
+                    <p>Tarihi dokusu, fıstığı ve kendine özgü mutfağı ile bilinen bir Güneydoğu şehri.</p>
+                </div>
+            </a>
+            <a href="sinop.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Sinop</h3>
+                    <p>Türkiye'nin en kuzey ucu, doğal bir liman ve Karadeniz'in en mutlu şehri olarak bilinir.</p>
+                </div>
+            </a>
+            <a href="sivas.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Sivas</h3>
+                    <p>Selçuklu mimarisinin en güzel örneklerini barındıran, Cumhuriyet'in temellerinin atıldığı tarihi bir şehir.</p>
+                </div>
+            </a>
+            <a href="sirnak.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Şırnak</h3>
+                    <p>Cudi Dağı ve zengin kültürel yapısıyla Güneydoğu Anadolu'nun bir sınır şehri.</p>
+                </div>
+            </a>
+            <a href="sanliurfa.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Şanlıurfa</h3>
+                    <p>Peygamberler şehri, Göbeklitepe ile tarihin sıfır noktası, zengin bir kültürel mirasa sahip.</p>
+                </div>
+            </a>
+            <a href="tekirdag.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Tekirdağ</h3>
+                    <p>Marmara Denizi kıyısında, sanayisi ve üzüm bağlarıyla bilinen bir Trakya şehri.</p>
+                </div>
+            </a>
+            <a href="tokat.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Tokat</h3>
+                    <p>Tarihi konakları, kalesi ve verimli topraklarıyla bir İç Anadolu şehri.</p>
+                </div>
+            </a>
+            <a href="trabzon.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Trabzon</h3>
+                    <p>Sümela Manastırı, Uzungöl ve fırtınalı doğasıyla Doğu Karadeniz'in en önemli şehirlerinden.</p>
+                </div>
+            </a>
+            <a href="tunceli.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Tunceli</h3>
+                    <p>Munzur Vadisi Milli Parkı ve eşsiz doğasıyla bir doğa ve macera turizmi merkezi.</p>
+                </div>
+            </a>
+            <a href="usak.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Uşak</h3>
+                    <p>Ege'nin iç kesimlerinde, kilimleri ve tarihi zenginlikleriyle bilinen bir sanayi şehri.</p>
+                </div>
+            </a>
+            <a href="van.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Van</h3>
+                    <p>Türkiye'nin en büyük gölüne ev sahipliği yapan, tarihi kalesi ve kedisiyle ünlü bir Doğu şehri.</p>
+                </div>
+            </a>
+            <a href="yalova.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Yalova</h3>
+                    <p>Termal kaynakları, yeşil doğası ve İstanbul'a yakınlığıyla bir sayfiye ve bahçecilik şehri.</p>
+                </div>
+            </a>
+            <a href="yozgat.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Yozgat</h3>
+                    <p>İç Anadolu'nun merkezinde, sakin ve gelişmekte olan bir şehir.</p>
+                </div>
+            </a>
+            <a href="zonguldak.html" class="city-card">
+                <div class="city-card-content">
+                    <h3>Zonguldak</h3>
+                    <p>Türkiye'nin en önemli taş kömürü madenlerine ev sahipliği yapan bir Karadeniz sanayi şehri.</p>
+                </div>
+            </a>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2025 yks tercih - Tüm Hakları Saklıdır.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

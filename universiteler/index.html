@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tüm Üniversiteler - YKS Tercih Rehberi</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        header.main-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header.main-header h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin: 0;
+        }
+        .search-filter-container {
+            margin-bottom: 30px;
+        }
+        #uniSearch {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .alphabet-filter {
+            text-align: center;
+            margin-top: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .alphabet-filter a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #34495e;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin: 2px;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.2s ease;
+        }
+        .alphabet-filter a:hover {
+            background-color: #2980b9;
+        }
+        #uniList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 60vh; /* Ekranın %60'ı kadar yükseklik */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #uniList li {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+        }
+        #uniList li:last-child {
+            border-bottom: none;
+        }
+        #uniList li a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+            display: block;
+        }
+        #uniList li a:hover {
+            color: #2c3e50;
+        }
+        .letter-anchor {
+            padding: 0 !important;
+            height: 0;
+            border: none !important;
+            margin:0 !important;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="main-header">
+            <h1>Üniversite Bul</h1>
+        </header>
+
+        <div class="search-filter-container">
+            <input type="text" id="uniSearch" onkeyup="searchFunction()" placeholder="Üniversite adını yazarak ara...">
+            
+            <div class="alphabet-filter">
+                <a href="#letter-A">A</a> <a href="#letter-B">B</a> <a href="#letter-C">C</a> <a href="#letter-D">D</a> <a href="#letter-E">E</a> <a href="#letter-F">F</a> <a href="#letter-G">G</a> <a href="#letter-H">H</a> <a href="#letter-I">I-İ</a> <a href="#letter-K">K</a> <a href="#letter-M">M</a> <a href="#letter-N">N</a> <a href="#letter-O">O</a> <a href="#letter-P">P</a> <a href="#letter-R">R</a> <a href="#letter-S">S</a> <a href="#letter-T">T</a> <a href="#letter-U">U</a> <a href="#letter-V">V</a> <a href="#letter-Y">Y</a> <a href="#letter-Z">Z</a>
+            </div>
+        </div>
+
+        <ul id="uniList">
+            <li class="letter-anchor" id="letter-A"></li>
+            <li><a href="universiteler-aa1.html#acibadem-mehmet-ali-aydinlar-universitesi">Acıbadem Mehmet Ali Aydınlar Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#adana-alparslan-turkes-bilim-ve-teknoloji-universitesi">Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#adiyaman-universitesi">Adıyaman Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#afyon-kocatepe-universitesi">Afyon Kocatepe Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#afyonkarahisar-saglik-bilimleri-universitesi">Afyonkarahisar Sağlık Bilimleri Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#agri-ibrahim-cecen-universitesi">Ağrı İbrahim Çeçen Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#aksaray-universitesi">Aksaray Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#alanya-alaaddin-keykubat-universitesi">Alanya Alaaddin Keykubat Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#alanya-hamdullah-emin-pasa-universitesi">Alanya Hamdullah Emin Paşa Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#altinbas-universitesi">Altınbaş Üniversitesi</a></li>
+            <li><a href="universiteler-aa1.html#amasya-universitesi">Amasya Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#anadolu-universitesi">Anadolu Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ankara-bilim-universitesi">Ankara Bilim Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ankara-haci-bayram-veli-universitesi">Ankara Hacı Bayram Veli Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ankara-medipol-universitesi">Ankara Medipol Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ankara-muzik-ve-guzel-sanatlar-universitesi">Ankara Müzik ve Güzel Sanatlar Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ankara-sosyal-bilimler-universitesi">Ankara Sosyal Bilimler Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ankara-universitesi">Ankara Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ankara-yildirim-beyazit-universitesi">Ankara Yıldırım Beyazıt Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#antalya-akev-universitesi">Antalya AKEV Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#antalya-bilim-universitesi">Antalya Bilim Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#ardahan-universitesi">Ardahan Üniversitesi</a></li>
+            <li><a href="universiteler-aa2.html#artvin-coruh-universitesi">Artvin Çoruh Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#ataturk-universitesi">Atatürk Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#atilim-universitesi">Atılım Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#avrasya-universitesi">Avrasya Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#aydin-adnan-menderes-universitesi">Aydın Adnan Menderes Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-B"></li>
+            <li><a href="universiteler-ab.html#bahcesehir-universitesi">Bahçeşehir Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#balikesir-universitesi">Balıkesir Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#bandirma-onyedi-eylul-universitesi">Bandırma Onyedi Eylül Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#bartin-universitesi">Bartın Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#baskent-universitesi">Başkent Üniversitesi</a></li>
+            <li><a href="universiteler-ab.html#batman-universitesi">Batman Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bayburt-universitesi">Bayburt Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#beykent-universitesi">Beykent Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#beykoz-universitesi">Beykoz Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bezm-i-alem-vakif-universitesi">Bezm-i Alem Vakıf Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bilecik-seyh-edebali-universitesi">Bilecik Şeyh Edebali Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bingol-universitesi">Bingöl Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#biruni-universitesi">Biruni Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bitlis-eren-universitesi">Bitlis Eren Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bogazici-universitesi">Boğaziçi Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bolu-abant-izzet-baysal-universitesi">Bolu Abant İzzet Baysal Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#burdur-mehmet-akif-ersoy-universitesi">Burdur Mehmet Akif Ersoy Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bursa-teknik-universitesi">Bursa Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-bc.html#bursa-uludag-universitesi">Bursa Uludağ Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-C"></li>
+            <li><a href="universiteler-cc.html#cag-universitesi">Çağ Üniversitesi</a></li>
+            <li><a href="universiteler-cc.html#canakkale-onsekiz-mart-universitesi">Çanakkale Onsekiz Mart Üniversitesi</a></li>
+            <li><a href="universiteler-cc.html#cankaya-universitesi">Çankaya Üniversitesi</a></li>
+            <li><a href="universiteler-cc.html#cankiri-karatekin-universitesi">Çankırı Karatekin Üniversitesi</a></li>
+            <li><a href="universiteler-cc.html#corum-hitit-universitesi">Çorum Hitit Üniversitesi</a></li>
+            <li><a href="universiteler-cc.html#cukurova-universitesi">Çukurova Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-D"></li>
+            <li><a href="universiteler-de.html#dicle-universitesi">Dicle Üniversitesi</a></li>
+            <li><a href="universiteler-de.html#dogus-universitesi">Doğuş Üniversitesi</a></li>
+            <li><a href="universiteler-de.html#dokuz-eylul-universitesi">Dokuz Eylül Üniversitesi</a></li>
+            <li><a href="universiteler-de.html#duzce-universitesi">Düzce Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-E"></li>
+            <li><a href="universiteler-ee.html#ege-universitesi">Ege Üniversitesi</a></li>
+            <li><a href="universiteler-ee.html#erciyes-universitesi">Erciyes Üniversitesi</a></li>
+            <li><a href="universiteler-ee.html#erzincan-binali-yildirim-universitesi">Erzincan Binali Yıldırım Üniversitesi</a></li>
+            <li><a href="universiteler-ee.html#erzurum-teknik-universitesi">Erzurum Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-ee.html#eskisehir-osmangazi-universitesi">Eskişehir Osmangazi Üniversitesi</a></li>
+            <li><a href="universiteler-ee.html#eskisehir-teknik-universitesi">Eskişehir Teknik Üniversitesi</a></li><li class="letter-anchor" id="letter-F"></li>
+            <li><a href="universiteler-fg.html#fatih-sultan-mehmet-vakif-universitesi">Fatih Sultan Mehmet Vakıf Üniversitesi</a></li>
+            <li><a href="universiteler-fg.html#fenerbahce-universitesi">Fenerbahçe Üniversitesi</a></li>
+            <li><a href="universiteler-fg.html#firat-universitesi">Fırat Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-G"></li>
+            <li><a href="universiteler-fg.html#galatasaray-universitesi">Galatasaray Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#gaziantep-islam-bilim-ve-teknoloji-universitesi">Gaziantep İslam Bilim ve Teknoloji Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#gaziantep-universitesi">Gaziantep Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#gazi-universitesi">Gazi Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#gebze-teknik-universitesi">Gebze Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#giresun-universitesi">Giresun Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#gumushane-universitesi">Gümüşhane Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-H"></li>
+            <li><a href="universiteler-gh.html#hacettepe-universitesi">Hacettepe Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#hakkari-universitesi">Hakkari Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#halic-universitesi">Haliç Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#harran-universitesi">Harran Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#hasan-kalyoncu-universitesi">Hasan Kalyoncu Üniversitesi</a></li>
+            <li><a href="universiteler-gh.html#hatay-mustafa-kemal-universitesi">Hatay Mustafa Kemal Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-I"></li>
+            <li><a href="universiteler-ii1.html#igdir-universitesi">Iğdır Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#isik-universitesi">Işık Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#isparta-uygulamali-bilimler-universitesi">Isparta Uygulamalı Bilimler Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#ibn-haldun-universitesi">İbn Haldun Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#ibrahim-dograci-bilkent-universitesi">İhsan Doğramacı Bilkent Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#iskenderun-teknik-universitesi">İskenderun Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#istanbul-29-mayis-universitesi">İstanbul 29 Mayıs Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#istanbul-arel-universitesi">İstanbul Arel Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#istanbul-atlas-universitesi">İstanbul Atlas Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#istanbul-aydin-universitesi">İstanbul Aydın Üniversitesi</a></li>
+            <li><a href="universiteler-ii1.html#istanbul-beykent-universitesi">İstanbul Beykent Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-bilgi-universitesi">İstanbul Bilgi Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-bilim-universitesi">İstanbul Bilim Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-esenyurt-universitesi">İstanbul Esenyurt Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-galata-universitesi">İstanbul Galata Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-gelisim-universitesi">İstanbul Gelişim Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-gedik-universitesi">İstanbul Gedik Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-kent-universitesi">İstanbul Kent Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-kultur-universitesi">İstanbul Kültür Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-medeniye-universitesi">İstanbul Medeniyet Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-medipol-universitesi">İstanbul Medipol Üniversitesi</a></li>
+            <li><a href="universiteler-ii2.html#istanbul-okan-universitesi">İstanbul Okan Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-rumeli-universitesi">İstanbul Rumeli Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-sabahattin-zaim-universitesi">İstanbul Sabahattin Zaim Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-saglik-ve-teknoloji-universitesi">İstanbul Sağlık ve Teknoloji Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-teknik-universitesi">İstanbul Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-ticaret-universitesi">İstanbul Ticaret Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-topkapi-universitesi">İstanbul Topkapı Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-universitesi">İstanbul Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#istanbul-universitesi-cerrahpasa">İstanbul Üniversitesi-Cerrahpaşa</a></li>
+            <li><a href="universiteler-iu.html#istinye-universitesi">İstinye Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#izmir-bakircay-universitesi">İzmir Bakırçay Üniversitesi</a></li>
+            <li><a href="universiteler-iu.html#izmir-demokrasi-universitesi">İzmir Demokrasi Üniversitesi</a></li>
+            <li><a href="universiteler-iy.html#izmir-ekonomi-universitesi">İzmir Ekonomi Üniversitesi</a></li>
+            <li><a href="universiteler-iy.html#izmir-katip-celebi-universitesi">İzmir Kâtip Çelebi Üniversitesi</a></li>
+            <li><a href="universiteler-iy.html#izmir-yuksek-teknoloji-enstitusu">İzmir Yüksek Teknoloji Enstitüsü</a></li>
+            <li class="letter-anchor" id="letter-K"></li>
+            <li><a href="universiteler-kk1.html#kadri-has-universitesi">Kadir Has Üniversitesi</a></li>
+            <li><a href="universiteler-kk1.html#kahramanmaras-istiklal-universitesi">Kahramanmaraş İstiklal Üniversitesi</a></li>
+            <li><a href="universiteler-kk1.html#kahramanmaras-sutcu-imam-universitesi">Kahramanmaraş Sütçü İmam Üniversitesi</a></li>
+            <li><a href="universiteler-kk1.html#karabuk-universitesi">Karabük Üniversitesi</a></li>
+            <li><a href="universiteler-kk1.html#karadeniz-teknik-universitesi">Karadeniz Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-kk1.html#karamanoglu-mehmetbey-universitesi">Karamanoğlu Mehmetbey Üniversitesi</a></li>
+            <li><a href="universiteler-kk1.html#kars-kafkas-universitesi">Kars Kafkas Üniversitesi</a></li>
+            <li><a href="universiteler-kk1.html#kastamonu-universitesi">Kastamonu Üniversitesi</a></li><li><a href="universiteler-kk2.html#kayseri-universitesi">Kayseri Üniversitesi</a></li>
+            <li><a href="universiteler-kk2.html#kilis-7-aralik-universitesi">Kilis 7 Aralık Üniversitesi</a></li>
+            <li><a href="universiteler-kk2.html#kirikkale-universitesi">Kırıkkale Üniversitesi</a></li>
+            <li><a href="universiteler-kk2.html#kirklareli-universitesi">Kırklareli Üniversitesi</a></li>
+            <li><a href="universiteler-kk2.html#kirsehir-ahi-evran-universitesi">Kırşehir Ahi Evran Üniversitesi</a></li>
+            <li><a href="universiteler-kk2.html#kocaeli-universitesi">Kocaeli Üniversitesi</a></li>
+            <li><a href="universiteler-kk3.html#koc-universitesi">Koç Üniversitesi</a></li>
+            <li><a href="universiteler-kk3.html#konya-gid-ve-tarim-universitesi">Konya Gıda ve Tarım Üniversitesi</a></li>
+            <li><a href="universiteler-kk3.html#konya-teknik-universitesi">Konya Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-kk3.html#kto-karatay-universitesi">KTO Karatay Üniversitesi</a></li>
+            <li><a href="universiteler-kk3.html#kutahya-dumlupinar-universitesi">Kütahya Dumlupınar Üniversitesi</a></li>
+            <li><a href="universiteler-kk3.html#kutahya-saglik-bilimleri-universitesi">Kütahya Sağlık Bilimleri Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-M"></li>
+            <li><a href="universiteler-mm.html#malatya-turgut-ozal-universitesi">Malatya Turgut Özal Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#manisa-celal-bayar-universitesi">Manisa Celal Bayar Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#mardin-artuklu-universitesi">Mardin Artuklu Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#marmara-universitesi">Marmara Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#meF-universitesi">MEF Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#mersin-universitesi">Mersin Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#mimar-sinan-guzel-sanatlar-universitesi">Mimar Sinan Güzel Sanatlar Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#mugla-sitki-kocman-universitesi">Muğla Sıtkı Koçman Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#munzur-universitesi">Munzur Üniversitesi</a></li>
+            <li><a href="universiteler-mm.html#mus-alparslan-universitesi">Muş Alparslan Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-N"></li>
+            <li><a href="universiteler-no.html#necmettin-erbakan-universitesi">Necmettin Erbakan Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#nevsehir-haci-bektas-veli-universitesi">Nevşehir Hacı Bektaş Veli Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#nigde-omer-halisdemir-universitesi">Niğde Ömer Halisdemir Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#nisantasi-universitesi">Nişantaşı Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#nuh-naci-yazgan-universitesi">Nuh Naci Yazgan Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-O"></li>
+            <li><a href="universiteler-no.html#ondokuz-mayis-universitesi">Ondokuz Mayıs Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#ordu-universitesi">Ordu Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#orta-dogu-teknik-universitesi">Orta Doğu Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#osmaniye-korkut-ata-universitesi">Osmaniye Korkut Ata Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#ostim-teknik-universitesi">Ostim Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-no.html#ozyegin-universitesi">Özyeğin Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-P"></li>
+            <li><a href="universiteler-ps.html#pamukkale-universitesi">Pamukkale Üniversitesi</a></li>
+            <li><a href="universiteler-ps.html#piri-reis-universitesi">Piri Reis Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-R"></li>
+            <li><a href="universiteler-ps.html#recep-tayyip-erdogan-universitesi">Recep Tayyip Erdoğan Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-S"></li>
+            <li><a href="universiteler-ps.html#sabanci-universitesi">Sabancı Üniversitesi</a></li>
+            <li><a href="universiteler-ps.html#saglik-bilimleri-universitesi">Sağlık Bilimleri Üniversitesi</a></li>
+            <li><a href="universiteler-ps.html#sakarya-uygulamali-bilimler-universitesi">Sakarya Uygulamalı Bilimler Üniversitesi</a></li>
+            <li><a href="universiteler-ps.html#sakarya-universitesi">Sakarya Üniversitesi</a></li>
+            <li><a href="universiteler-ps.html#samsun-universitesi">Samsun Üniversitesi</a></li>
+            <li><a href="universiteler-ps.html#sanko-universitesi">Sanko Üniversitesi</a></li>
+            <li><a href="universiteler-ps.html#selcuk-universitesi">Selçuk Üniversitesi</a></li>
+            <li><a href="universiteler-ss.html#siirt-universitesi">Siirt Üniversitesi</a></li>
+            <li><a href="universiteler-ss.html#sinop-universitesi">Sinop Üniversitesi</a></li>
+            <li><a href="universiteler-ss.html#sivas-bilim-ve-teknoloji-universitesi">Sivas Bilim ve Teknoloji Üniversitesi</a></li>
+            <li><a href="universiteler-ss.html#sivas-cumhuriyet-universitesi">Sivas Cumhuriyet Üniversitesi</a></li>
+            <li><a href="universiteler-ss.html#suleyman-demirel-universitesi">Süleyman Demirel Üniversitesi</a></li>
+            <li><a href="universiteler-st.html#sirnak-universitesi">Şırnak Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-T"></li>
+            <li><a href="universiteler-st.html#tarsus-universitesi">Tarsus Üniversitesi</a></li>
+            <li><a href="universiteler-st.html#ted-universitesi">TED Üniversitesi</a></li>
+            <li><a href="universiteler-st.html#tekirdag-namik-kemal-universitesi">Tekirdağ Namık Kemal Üniversitesi</a></li>
+            <li><a href="universiteler-st.html#tobb-ekonomi-ve-teknoloji-universitesi">TOBB Ekonomi ve Teknoloji Üniversitesi</a></li>
+            <li><a href="universiteler-st.html#tokat-gaziosmanpasa-universitesi">Tokat Gaziosmanpaşa Üniversitesi</a></li>
+            <li><a href="universiteler-st.html#toros-universitesi">Toros Üniversitesi</a></li>
+            <li><a href="universiteler-uy.html#trabzon-universitesi">Trabzon Üniversitesi</a></li>
+            <li><a href="universiteler-uy.html#trakya-universitesi">Trakya Üniversitesi</a></li>
+            <li><a href="universiteler-uy.html#tunceli-munzur-universitesi">Tunceli Munzur Üniversitesi</a></li>
+            <li><a href="universiteler-uy.html#turk-alman-universitesi">Türk-Alman Üniversitesi</a></li>
+            <li><a href="universiteler-uy.html#turk-hava-kurumu-universitesi">Türk Hava Kurumu Üniversitesi</a></li>
+            <li><a href="universiteler-uy.html#turk-japon-bilim-ve-teknoloji-universitesi">Türk-Japon Bilim ve Teknoloji Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-U"></li>
+            <li><a href="universiteler-uy.html#ufuk-universitesi">Ufuk Üniversitesi</a></li>
+            <li><a href="universiteler-uy.html#usak-universitesi">Uşak Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-V"></li>
+            <li><a href="universiteler-vy.html#van-yuzuncu-yil-universitesi">Van Yüzüncü Yıl Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-Y"></li>
+            <li><a href="universiteler-vy.html#yalova-universitesi">Yalova Üniversitesi</a></li>
+            <li><a href="universiteler-vy.html#yasar-universitesi">Yaşar Üniversitesi</a></li>
+            <li><a href="universiteler-vy.html#yeditepe-universitesi">Yeditepe Üniversitesi</a></li>
+            <li><a href="universiteler-vy.html#yeni-yuzyil-universitesi">Yeni Yüzyıl Üniversitesi</a></li>
+            <li><a href="universiteler-vy.html#yildiz-teknik-universitesi">Yıldız Teknik Üniversitesi</a></li>
+            <li><a href="universiteler-yz.html#yozgat-bozok-universitesi">Yozgat Bozok Üniversitesi</a></li>
+            <li><a href="universiteler-yz.html#yuksek-ihtisas-universitesi">Yüksek İhtisas Üniversitesi</a></li>
+            <li class="letter-anchor" id="letter-Z"></li>
+            <li><a href="universiteler-yz.html#zonguldak-bulent-ecevit-universitesi">Zonguldak Bülent Ecevit Üniversitesi</a></li>
+        </ul>
+        
+        <footer>
+            <p>&copy; 2025 yks tercih - Bu rehber bilgilendirme amacıyla hazırlanmıştır.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function searchFunction() {
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('uniSearch');
+            filter = input.value.toLocaleUpperCase('tr-TR');
+            ul = document.getElementById("uniList");
+            li = ul.getElementsByTagName('li');
+
+            for (i = 0; i < li.length; i++) {
+                if (li[i].classList.contains('letter-anchor')) continue;
+                
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toLocaleUpperCase('tr-TR').indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

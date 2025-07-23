@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üniversiteleri Keşfet - YKS Tercih Rehberi</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        header.main-header {
+            background: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        header.main-header h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin: 0;
+            font-weight: bold;
+        }
+        .filter-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .filter-container input, .filter-container select {
+            flex-grow: 1;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        .university-card {
+            background-color: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            font-weight: bold;
+        }
+        .university-card h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 1.8em;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        .inner-box {
+            border: 1px solid #e9e9e9;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .box-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #34495e;
+        }
+        .uni-details { list-style: none; padding: 0; margin: 0; }
+        .uni-details li { margin-bottom: 8px; font-size: 1em; }
+        .uni-details strong { color: #333; width: 120px; display: inline-block; }
+        .data-table { width: 100%; text-align: left; font-size: 0.95em; border-collapse: collapse; }
+        .data-table th, .data-table td { padding: 10px; border-bottom: 1px solid #eee; }
+        .data-table th { font-weight: bold; background-color: #f9f9f9; }
+        footer { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 0.9em; color: #777; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="main-header">
+            <h1>Üniversiteleri Keşfet</h1>
+        </header>
+
+        <div class="filter-container">
+            <input type="text" id="nameSearch" placeholder="Üniversite adıyla ara...">
+            <select id="cityFilter">
+                <option value="">Tüm Şehirler</option>
+                </select>
+            <select id="typeFilter">
+                <option value="">Tüm Türler</option>
+                <option value="Devlet">Devlet</option>
+                <option value="Vakıf">Vakıf</option>
+            </select>
+        </div>
+
+        <main id="university-list-container">
+            </main>
+        
+        <footer>
+            <p>&copy; 2025 yks tercih - Bu rehber bilgilendirme amacıyla hazırlanmıştır.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // === TÜM ÜNİVERSİTELERİN VERİLERİ ===
+        // Siz "devam" dedikçe bu listeyi genişleteceğiz.
+        const universityData = [
+            {
+                "id": "acibadem-mehmet-ali-aydinlar-universitesi",
+                "name": "Acıbadem Mehmet Ali Aydınlar Üniversitesi",
+                "year": "2007", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~5.000", "academics": "~300", "language": "Türkçe / İngilizce",
+                "ranks": {
+                    "urap_tr": "45", "urap_world": "1863",
+                    "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor",
+                    "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor"
+                }
+            },
+            {
+                "id": "adana-alparslan-turkes-bilim-ve-teknoloji-universitesi",
+                "name": "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi",
+                "year": "2011", "type": "Devlet", "city": "Adana", "city_link": "../sehirler/adana.html",
+                "students": "~6.000", "academics": "~150", "language": "İngilizce Ağırlıklı",
+                "ranks": {
+                    "urap_tr": "105", "urap_world": "3000+",
+                    "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor",
+                    "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor"
+                }
+            },
+            {
+                "id": "adiyaman-universitesi",
+                "name": "Adıyaman Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Adıyaman", "city_link": "../sehirler/adiyaman.html",
+                "students": "~17.000", "academics": "~350", "language": "Türkçe",
+                "ranks": {
+                    "urap_tr": "110", "urap_world": "3000+",
+                    "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor",
+                    "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor"
+                }
+            },
+            {
+                "id": "afyon-kocatepe-universitesi",
+                "name": "Afyon Kocatepe Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Afyonkarahisar", "city_link": "../sehirler/afyonkarahisar.html",
+                "students": "~33.000", "academics": "~600", "language": "Türkçe",
+                "ranks": {
+                    "urap_tr": "80", "urap_world": "2501-3000",
+                    "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor",
+                    "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor"
+                }
+            },
+,
+            {
+                "id": "afyonkarahisar-saglik-bilimleri-universitesi",
+                "name": "Afyonkarahisar Sağlık Bilimleri Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Afyonkarahisar", "city_link": "../sehirler/afyonkarahisar.html",
+                "students": "~8.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "122", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "agri-ibrahim-cecen-universitesi",
+                "name": "Ağrı İbrahim Çeçen Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Ağrı", "city_link": "../sehirler/agri.html",
+                "students": "~12.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "137", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "aksaray-universitesi",
+                "name": "Aksaray Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Aksaray", "city_link": "../sehirler/aksaray.html",
+                "students": "~24.000", "academics": "~400", "language": "Türkçe",
+                "ranks": { "urap_tr": "83", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "alanya-alaaddin-keykubat-universitesi",
+                "name": "Alanya Alaaddin Keykubat Üniversitesi",
+                "year": "2015", "type": "Devlet", "city": "Antalya", "city_link": "../sehirler/antalya.html",
+                "students": "~15.000", "academics": "~280", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "108", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "alanya-hamdullah-emin-pasa-universitesi",
+                "name": "Alanya Hamdullah Emin Paşa Üniversitesi",
+                "year": "2011", "type": "Vakıf", "city": "Antalya", "city_link": "../sehirler/antalya.html",
+                "students": "~1.000", "academics": "~50", "language": "İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "altinbas-universitesi",
+                "name": "Altınbaş Üniversitesi",
+                "year": "2008", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~12.000", "academics": "~300", "language": "İngilizce Ağırlıklı",
+                "ranks": { "urap_tr": "114", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "amasya-universitesi",
+                "name": "Amasya Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Amasya", "city_link": "../sehirler/amasya.html",
+                "students": "~18.000", "academics": "~320", "language": "Türkçe",
+                "ranks": { "urap_tr": "102", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "anadolu-universitesi",
+                "name": "Anadolu Üniversitesi",
+                "year": "1958", "type": "Devlet", "city": "Eskişehir", "city_link": "../sehirler/eskisehir.html",
+                "students": "~30.000 (Örgün)", "academics": "~1.100", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "23", "urap_world": "1324", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+,
+            {
+                "id": "ankara-bilim-universitesi",
+                "name": "Ankara Bilim Üniversitesi",
+                "year": "2020", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~1.300", "academics": "~60", "language": "İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ankara-haci-bayram-veli-universitesi",
+                "name": "Ankara Hacı Bayram Veli Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~28.800", "academics": "~550", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "65", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ankara-medipol-universitesi",
+                "name": "Ankara Medipol Üniversitesi",
+                "year": "2018", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~4.600", "academics": "~180", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "132", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ankara-muzik-ve-guzel-sanatlar-universitesi",
+                "name": "Ankara Müzik ve Güzel Sanatlar Üniversitesi",
+                "year": "2017", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~600", "academics": "~55", "language": "Türkçe",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ankara-sosyal-bilimler-universitesi",
+                "name": "Ankara Sosyal Bilimler Üniversitesi",
+                "year": "2013", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~5.200", "academics": "~200", "language": "İngilizce Ağırlıklı",
+                "ranks": { "urap_tr": "127", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ankara-universitesi",
+                "name": "Ankara Üniversitesi",
+                "year": "1946", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~70.000", "academics": "~2.500", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "6", "urap_world": "792", "qs_tr": "10", "qs_world": "901-950", "the_tr": "8", "the_world": "1001-1200" }
+            },
+            {
+                "id": "ankara-yildirim-beyazit-universitesi",
+                "name": "Ankara Yıldırım Beyazıt Üniversitesi",
+                "year": "2010", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~24.000", "academics": "~750", "language": "İngilizce Ağırlıklı",
+                "ranks": { "urap_tr": "50", "urap_world": "1916", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "antalya-akev-universitesi",
+                "name": "Antalya AKEV Üniversitesi",
+                "year": "2015", "type": "Vakıf", "city": "Antalya", "city_link": "../sehirler/antalya.html",
+                "students": "~1.500", "academics": "~70", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "antalya-bilim-universitesi",
+                "name": "Antalya Bilim Üniversitesi",
+                "year": "2010", "type": "Vakıf", "city": "Antalya", "city_link": "../sehirler/antalya.html",
+                "students": "~4.000", "academics": "~150", "language": "İngilizce",
+                "ranks": { "urap_tr": "106", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ardahan-universitesi",
+                "name": "Ardahan Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Ardahan", "city_link": "../sehirler/ardahan.html",
+                "students": "~5.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "169", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "artvin-coruh-universitesi",
+                "name": "Artvin Çoruh Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Artvin", "city_link": "../sehirler/artvin.html",
+                "students": "~10.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "117", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ataturk-universitesi",
+                "name": "Atatürk Üniversitesi",
+                "year": "1957", "type": "Devlet", "city": "Erzurum", "city_link": "../sehirler/erzurum.html",
+                "students": "~60.000", "academics": "~1.800", "language": "Türkçe",
+                "ranks": { "urap_tr": "17", "urap_world": "1152", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+// bölüm 4
+,
+            {
+                "id": "atilim-universitesi",
+                "name": "Atılım Üniversitesi",
+                "year": "1996", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~10.600", "academics": "~320", "language": "İngilizce",
+                "ranks": { "urap_tr": "25", "urap_world": "1378", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "11", "the_world": "1201-1500" }
+            },
+            {
+                "id": "avrasya-universitesi",
+                "name": "Avrasya Üniversitesi",
+                "year": "2010", "type": "Vakıf", "city": "Trabzon", "city_link": "../sehirler/trabzon.html",
+                "students": "~5.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "167", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "aydin-adnan-menderes-universitesi",
+                "name": "Aydın Adnan Menderes Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Aydın", "city_link": "../sehirler/aydin.html",
+                "students": "~48.000", "academics": "~900", "language": "Türkçe",
+                "ranks": { "urap_tr": "64", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bahcesehir-universitesi",
+                "name": "Bahçeşehir Üniversitesi",
+                "year": "1998", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~25.000", "academics": "~550", "language": "İngilizce",
+                "ranks": { "urap_tr": "19", "urap_world": "1211", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "9", "the_world": "1001-1200" }
+            },
+            {
+                "id": "balikesir-universitesi",
+                "name": "Balıkesir Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Balıkesir", "city_link": "../sehirler/balikesir.html",
+                "students": "~35.000", "academics": "~650", "language": "Türkçe",
+                "ranks": { "urap_tr": "75", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bandirma-onyedi-eylul-universitesi",
+                "name": "Bandırma Onyedi Eylül Üniversitesi",
+                "year": "2015", "type": "Devlet", "city": "Balıkesir", "city_link": "../sehirler/balikesir.html",
+                "students": "~13.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "99", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bartin-universitesi",
+                "name": "Bartın Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Bartın", "city_link": "../sehirler/bartin.html",
+                "students": "~15.000", "academics": "~350", "language": "Türkçe",
+                "ranks": { "urap_tr": "95", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "baskent-universitesi",
+                "name": "Başkent Üniversitesi",
+                "year": "1994", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~17.000", "academics": "~800", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "27", "urap_world": "1424", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "batman-universitesi",
+                "name": "Batman Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Batman", "city_link": "../sehirler/batman.html",
+                "students": "~15.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "130", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+//////////////////////////////////////////////////////////////////////////////bölüm 5//////////////////
+,
+            {
+                "id": "bayburt-universitesi",
+                "name": "Bayburt Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Bayburt", "city_link": "../sehirler/bayburt.html",
+                "students": "~10.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "128", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "beykent-universitesi",
+                "name": "Beykent Üniversitesi",
+                "year": "1997", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~30.000", "academics": "~450", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "98", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "beykoz-universitesi",
+                "name": "Beykoz Üniversitesi",
+                "year": "2016", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~5.000", "academics": "~100", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bezm-i-alem-vakif-universitesi",
+                "name": "Bezm-i Alem Vakıf Üniversitesi",
+                "year": "2010", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~6.000", "academics": "~400", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "38", "urap_world": "1673", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bilecik-seyh-edebali-universitesi",
+                "name": "Bilecik Şeyh Edebali Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Bilecik", "city_link": "../sehirler/bilecik.html",
+                "students": "~17.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "92", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bingol-universitesi",
+                "name": "Bingöl Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Bingöl", "city_link": "../sehirler/bingol.html",
+                "students": "~15.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "90", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "biruni-universitesi",
+                "name": "Biruni Üniversitesi",
+                "year": "2014", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~10.000", "academics": "~350", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "82", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bitlis-eren-universitesi",
+                "name": "Bitlis Eren Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Bitlis", "city_link": "../sehirler/bitlis.html",
+                "students": "~10.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "142", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bogazici-universitesi",
+                "name": "Boğaziçi Üniversitesi",
+                "year": "1863", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~15.000", "academics": "~600", "language": "İngilizce",
+                "ranks": { "urap_tr": "5", "urap_world": "777", "qs_tr": "7", "qs_world": "514", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+//////////////////Bölüm 6  ///////////////////////////////////////
+,
+            {
+                "id": "bolu-abant-izzet-baysal-universitesi",
+                "name": "Bolu Abant İzzet Baysal Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Bolu", "city_link": "../sehirler/bolu.html",
+                "students": "~30.000", "academics": "~700", "language": "Türkçe",
+                "ranks": { "urap_tr": "66", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "burdur-mehmet-akif-ersoy-universitesi",
+                "name": "Burdur Mehmet Akif Ersoy Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Burdur", "city_link": "../sehirler/burdur.html",
+                "students": "~38.000", "academics": "~550", "language": "Türkçe",
+                "ranks": { "urap_tr": "85", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bursa-teknik-universitesi",
+                "name": "Bursa Teknik Üniversitesi",
+                "year": "2010", "type": "Devlet", "city": "Bursa", "city_link": "../sehirler/bursa.html",
+                "students": "~8.000", "academics": "~250", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "63", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "bursa-uludag-universitesi",
+                "name": "Bursa Uludağ Üniversitesi",
+                "year": "1975", "type": "Devlet", "city": "Bursa", "city_link": "../sehirler/bursa.html",
+                "students": "~65.000", "academics": "~1.500", "language": "Türkçe",
+                "ranks": { "urap_tr": "28", "urap_world": "1459", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "cag-universitesi",
+                "name": "Çağ Üniversitesi",
+                "year": "1997", "type": "Vakıf", "city": "Mersin", "city_link": "../sehirler/mersin.html",
+                "students": "~5.000", "academics": "~100", "language": "İngilizce",
+                "ranks": { "urap_tr": "135", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "canakkale-onsekiz-mart-universitesi",
+                "name": "Çanakkale Onsekiz Mart Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Çanakkale", "city_link": "../sehirler/canakkale.html",
+                "students": "~45.000", "academics": "~900", "language": "Türkçe",
+                "ranks": { "urap_tr": "46", "urap_world": "1876", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "cankaya-universitesi",
+                "name": "Çankaya Üniversitesi",
+                "year": "1997", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~9.000", "academics": "~250", "language": "İngilizce",
+                "ranks": { "urap_tr": "13", "urap_world": "1089", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "4", "the_world": "601-800" }
+            },
+            {
+                "id": "cankiri-karatekin-universitesi",
+                "name": "Çankırı Karatekin Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Çankırı", "city_link": "../sehirler/cankiri.html",
+                "students": "~10.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "112", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+////////////////////////////             Bölüm 7              /////////////////////////
+,
+            {
+                "id": "corum-hitit-universitesi",
+                "name": "Çorum Hitit Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Çorum", "city_link": "../sehirler/corum.html",
+                "students": "~17.000", "academics": "~400", "language": "Türkçe",
+                "ranks": { "urap_tr": "74", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "cukurova-universitesi",
+                "name": "Çukurova Üniversitesi",
+                "year": "1973", "type": "Devlet", "city": "Adana", "city_link": "../sehirler/adana.html",
+                "students": "~40.000", "academics": "~1.200", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "18", "urap_world": "1177", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "demiroglu-bilim-universitesi",
+                "name": "Demiroğlu Bilim Üniversitesi",
+                "year": "2006", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~3.500", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "150", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "dicle-universitesi",
+                "name": "Dicle Üniversitesi",
+                "year": "1974", "type": "Devlet", "city": "Diyarbakır", "city_link": "../sehirler/diyarbakir.html",
+                "students": "~32.000", "academics": "~950", "language": "Türkçe",
+                "ranks": { "urap_tr": "49", "urap_world": "1899", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "dogus-universitesi",
+                "name": "Doğuş Üniversitesi",
+                "year": "1997", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~15.000", "academics": "~200", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "145", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "dokuz-eylul-universitesi",
+                "name": "Dokuz Eylül Üniversitesi",
+                "year": "1982", "type": "Devlet", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~65.000", "academics": "~1.900", "language": "Türkçe",
+                "ranks": { "urap_tr": "15", "urap_world": "1121", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "duzce-universitesi",
+                "name": "Düzce Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Düzce", "city_link": "../sehirler/duzce.html",
+                "students": "~30.000", "academics": "~550", "language": "Türkçe",
+                "ranks": { "urap_tr": "41", "urap_world": "1746", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ege-universitesi",
+                "name": "Ege Üniversitesi",
+                "year": "1955", "type": "Devlet", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~55.000", "academics": "~2.000", "language": "Türkçe",
+                "ranks": { "urap_tr": "9", "urap_world": "917", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+/////////////////////////////////////          Bölüm 8          /////////////////////////////////
+,
+            {
+                "id": "erciyes-universitesi",
+                "name": "Erciyes Üniversitesi",
+                "year": "1978", "type": "Devlet", "city": "Kayseri", "city_link": "../sehirler/kayseri.html",
+                "students": "~50.000", "academics": "~1.500", "language": "Türkçe",
+                "ranks": { "urap_tr": "11", "urap_world": "1007", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "erzincan-binali-yildirim-universitesi",
+                "name": "Erzincan Binali Yıldırım Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Erzincan", "city_link": "../sehirler/erzincan.html",
+                "students": "~22.000", "academics": "~450", "language": "Türkçe",
+                "ranks": { "urap_tr": "70", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "erzurum-teknik-universitesi",
+                "name": "Erzurum Teknik Üniversitesi",
+                "year": "2010", "type": "Devlet", "city": "Erzurum", "city_link": "../sehirler/erzurum.html",
+                "students": "~6.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "96", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "eskisehir-osmangazi-universitesi",
+                "name": "Eskişehir Osmangazi Üniversitesi",
+                "year": "1970", "type": "Devlet", "city": "Eskişehir", "city_link": "../sehirler/eskisehir.html",
+                "students": "~35.000", "academics": "~1.200", "language": "Türkçe",
+                "ranks": { "urap_tr": "33", "urap_world": "1563", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "eskisehir-teknik-universitesi",
+                "name": "Eskişehir Teknik Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Eskişehir", "city_link": "../sehirler/eskisehir.html",
+                "students": "~13.000", "academics": "~300", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "59", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "fatih-sultan-mehmet-vakif-universitesi",
+                "name": "Fatih Sultan Mehmet Vakıf Üniversitesi",
+                "year": "2010", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~8.000", "academics": "~200", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "136", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "fenerbahce-universitesi",
+                "name": "Fenerbahçe Üniversitesi",
+                "year": "2016", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~4.000", "academics": "~100", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "firat-universitesi",
+                "name": "Fırat Üniversitesi",
+                "year": "1975", "type": "Devlet", "city": "Elazığ", "city_link": "../sehirler/elazig.html",
+                "students": "~40.000", "academics": "~900", "language": "Türkçe",
+                "ranks": { "urap_tr": "34", "urap_world": "1589", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+/////////////////////////////////////             Bölüm 9     //////////////////////////////////////
+
+
+,
+            {
+                "id": "galatasaray-universitesi",
+                "name": "Galatasaray Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~3.500", "academics": "~200", "language": "Fransızca",
+                "ranks": { "urap_tr": "86", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "gaziantep-islam-bilim-ve-teknoloji-universitesi",
+                "name": "Gaziantep İslam Bilim ve Teknoloji Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Gaziantep", "city_link": "../sehirler/gaziantep.html",
+                "students": "~2.500", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "gaziantep-universitesi",
+                "name": "Gaziantep Üniversitesi",
+                "year": "1987", "type": "Devlet", "city": "Gaziantep", "city_link": "../sehirler/gaziantep.html",
+                "students": "~46.000", "academics": "~1.000", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "31", "urap_world": "1518", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "gazi-universitesi",
+                "name": "Gazi Üniversitesi",
+                "year": "1926", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~43.000", "academics": "~2.000", "language": "Türkçe",
+                "ranks": { "urap_tr": "7", "urap_world": "868", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "gebze-teknik-universitesi",
+                "name": "Gebze Teknik Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Kocaeli", "city_link": "../sehirler/kocaeli.html",
+                "students": "~9.000", "academics": "~500", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "10", "urap_world": "989", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "giresun-universitesi",
+                "name": "Giresun Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Giresun", "city_link": "../sehirler/giresun.html",
+                "students": "~28.000", "academics": "~500", "language": "Türkçe",
+                "ranks": { "urap_tr": "81", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "gumushane-universitesi",
+                "name": "Gümüşhane Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Gümüşhane", "city_link": "../sehirler/gumushane.html",
+                "students": "~19.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "107", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "hacettepe-universitesi",
+                "name": "Hacettepe Üniversitesi",
+                "year": "1967", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~50.000", "academics": "~2.800", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "2", "urap_world": "541", "qs_tr": "6", "qs_world": "641-650", "the_tr": "6", "the_world": "601-800" }
+            },
+
+///////////////////////              bölüm 10              ///////////////////////////////
+
+,
+            {
+                "id": "hakkari-universitesi",
+                "name": "Hakkari Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Hakkari", "city_link": "../sehirler/hakkari.html",
+                "students": "~4.000", "academics": "~100", "language": "Türkçe",
+                "ranks": { "urap_tr": "171", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "halic-universitesi",
+                "name": "Haliç Üniversitesi",
+                "year": "1998", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~12.000", "academics": "~300", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "103", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "harran-universitesi",
+                "name": "Harran Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Şanlıurfa", "city_link": "../sehirler/sanliurfa.html",
+                "students": "~25.000", "academics": "~500", "language": "Türkçe",
+                "ranks": { "urap_tr": "77", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "hasan-kalyoncu-universitesi",
+                "name": "Hasan Kalyoncu Üniversitesi",
+                "year": "2008", "type": "Vakıf", "city": "Gaziantep", "city_link": "../sehirler/gaziantep.html",
+                "students": "~10.000", "academics": "~250", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "91", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "hatay-mustafa-kemal-universitesi",
+                "name": "Hatay Mustafa Kemal Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Hatay", "city_link": "../sehirler/hatay.html",
+                "students": "~30.000", "academics": "~700", "language": "Türkçe",
+                "ranks": { "urap_tr": "68", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "igdir-universitesi",
+                "name": "Iğdır Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Iğdır", "city_link": "../sehirler/igdir.html",
+                "students": "~10.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "152", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "isik-universitesi",
+                "name": "Işık Üniversitesi",
+                "year": "1996", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~6.000", "academics": "~250", "language": "İngilizce",
+                "ranks": { "urap_tr": "115", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "isparta-uygulamali-bilimler-universitesi",
+                "name": "Isparta Uygulamalı Bilimler Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Isparta", "city_link": "../sehirler/isparta.html",
+                "students": "~30.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "125", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ibn-haldun-universitesi",
+                "name": "İbn Haldun Üniversitesi",
+                "year": "2015", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~2.500", "academics": "~150", "language": "İngilizce / Türkçe / Arapça",
+                "ranks": { "urap_tr": "156", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+
+
+//////////////////////////////////       Bölüm 11          /////////////////////////////////////////
+
+,
+            {
+                "id": "ihsan-dogramaci-bilkent-universitesi",
+                "name": "İhsan Doğramacı Bilkent Üniversitesi",
+                "year": "1984", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~12.000", "academics": "~650", "language": "İngilizce",
+                "ranks": { "urap_tr": "8", "urap_world": "890", "qs_tr": "5", "qs_world": "502", "the_tr": "5", "the_world": "601-800" }
+            },
+            {
+                "id": "inonu-universitesi",
+                "name": "İnönü Üniversitesi",
+                "year": "1975", "type": "Devlet", "city": "Malatya", "city_link": "../sehirler/malatya.html",
+                "students": "~35.000", "academics": "~1.000", "language": "Türkçe",
+                "ranks": { "urap_tr": "40", "urap_world": "1721", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "iskenderun-teknik-universitesi",
+                "name": "İskenderun Teknik Üniversitesi",
+                "year": "2015", "type": "Devlet", "city": "Hatay", "city_link": "../sehirler/hatay.html",
+                "students": "~12.000", "academics": "~280", "language": "Türkçe",
+                "ranks": { "urap_tr": "97", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-29-mayis-universitesi",
+                "name": "İstanbul 29 Mayıs Üniversitesi",
+                "year": "2010", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~5.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "111", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-arel-universitesi",
+                "name": "İstanbul Arel Üniversitesi",
+                "year": "2007", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~20.000", "academics": "~200", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "151", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-atlas-universitesi",
+                "name": "İstanbul Atlas Üniversitesi",
+                "year": "2018", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~4.000", "academics": "~150", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-aydin-universitesi",
+                "name": "İstanbul Aydın Üniversitesi",
+                "year": "2007", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~35.000", "academics": "~600", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "61", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-beykent-universitesi",
+                "name": "İstanbul Beykent Üniversitesi",
+                "year": "1997", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~30.000", "academics": "~450", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "98", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-bilgi-universitesi",
+                "name": "İstanbul Bilgi Üniversitesi",
+                "year": "1996", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~20.000", "academics": "~500", "language": "İngilizce",
+                "ranks": { "urap_tr": "67", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 12          /////////////////////////////////////////
+
+,
+            {
+                "id": "istanbul-bilim-universitesi",
+                "name": "İstanbul Bilim Üniversitesi",
+                "year": "2006", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~3.500", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "150", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-esenyurt-universitesi",
+                "name": "İstanbul Esenyurt Üniversitesi",
+                "year": "2013", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~10.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "170", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-galata-universitesi",
+                "name": "İstanbul Galata Üniversitesi",
+                "year": "2020", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~2.000", "academics": "~80", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-gelisim-universitesi",
+                "name": "İstanbul Gelişim Üniversitesi",
+                "year": "2011", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~30.000", "academics": "~400", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "88", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-gedik-universitesi",
+                "name": "İstanbul Gedik Üniversitesi",
+                "year": "2010", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~9.000", "academics": "~150", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "165", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-kent-universitesi",
+                "name": "İstanbul Kent Üniversitesi",
+                "year": "2016", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~6.000", "academics": "~150", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-kultur-universitesi",
+                "name": "İstanbul Kültür Üniversitesi",
+                "year": "1997", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~15.000", "academics": "~300", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "121", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-medeniyet-universitesi",
+                "name": "İstanbul Medeniyet Üniversitesi",
+                "year": "2010", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~13.000", "academics": "~450", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "57", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-medipol-universitesi",
+                "name": "İstanbul Medipol Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~40.000", "academics": "~600", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "52", "urap_world": "1944", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 13          /////////////////////////////////////////
+
+
+,
+            {
+                "id": "istanbul-okan-universitesi",
+                "name": "İstanbul Okan Üniversitesi",
+                "year": "1999", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~25.000", "academics": "~400", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "89", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-rumeli-universitesi",
+                "name": "İstanbul Rumeli Üniversitesi",
+                "year": "2015", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~10.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-sabahattin-zaim-universitesi",
+                "name": "İstanbul Sabahattin Zaim Üniversitesi",
+                "year": "2010", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~11.000", "academics": "~250", "language": "Türkçe / İngilizce / Arapça",
+                "ranks": { "urap_tr": "109", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-saglik-ve-teknoloji-universitesi",
+                "name": "İstanbul Sağlık ve Teknoloji Üniversitesi",
+                "year": "2018", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~3.000", "academics": "~100", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-teknik-universitesi",
+                "name": "İstanbul Teknik Üniversitesi",
+                "year": "1773", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~37.000", "academics": "~1.300", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "4", "urap_world": "574", "qs_tr": "2", "qs_world": "404", "the_tr": "4", "the_world": "501-600" }
+            },
+            {
+                "id": "istanbul-ticaret-universitesi",
+                "name": "İstanbul Ticaret Üniversitesi",
+                "year": "2001", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~9.000", "academics": "~200", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "131", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-topkapi-universitesi",
+                "name": "İstanbul Topkapı Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~10.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-universitesi",
+                "name": "İstanbul Üniversitesi",
+                "year": "1453", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~65.000", "academics": "~2.200", "language": "Türkçe",
+                "ranks": { "urap_tr": "10", "urap_world": "928", "qs_tr": "8", "qs_world": "711-720", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "istanbul-universitesi-cerrahpasa",
+                "name": "İstanbul Üniversitesi-Cerrahpaşa",
+                "year": "2018", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~40.000", "academics": "~1.200", "language": "Türkçe",
+                "ranks": { "urap_tr": "14", "urap_world": "1100", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+,
+
+
+//////////////////////////////////       Bölüm 14          /////////////////////////////////////////
+
+,
+            {
+                "id": "istinye-universitesi",
+                "name": "İstinye Üniversitesi",
+                "year": "2015", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~15.000", "academics": "~450", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "71", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "izmir-bakircay-universitesi",
+                "name": "İzmir Bakırçay Üniversitesi",
+                "year": "2016", "type": "Devlet", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~10.000", "academics": "~200", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "123", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "izmir-demokrasi-universitesi",
+                "name": "İzmir Demokrasi Üniversitesi",
+                "year": "2016", "type": "Devlet", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~8.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "134", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "izmir-ekonomi-universitesi",
+                "name": "İzmir Ekonomi Üniversitesi",
+                "year": "2001", "type": "Vakıf", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~10.000", "academics": "~400", "language": "İngilizce",
+                "ranks": { "urap_tr": "44", "urap_world": "1834", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "izmir-katip-celebi-universitesi",
+                "name": "İzmir Kâtip Çelebi Üniversitesi",
+                "year": "2010", "type": "Devlet", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~15.000", "academics": "~500", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "54", "urap_world": "1974", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "izmir-yuksek-teknoloji-enstitusu",
+                "name": "İzmir Yüksek Teknoloji Enstitüsü",
+                "year": "1992", "type": "Devlet", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~5.500", "academics": "~350", "language": "İngilizce",
+                "ranks": { "urap_tr": "12", "urap_world": "1079", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "7", "the_world": "801-1000" }
+            },
+            {
+                "id": "kadir-has-universitesi",
+                "name": "Kadir Has Üniversitesi",
+                "year": "1997", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~7.000", "academics": "~300", "language": "İngilizce",
+                "ranks": { "urap_tr": "56", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kahramanmaras-istiklal-universitesi",
+                "name": "Kahramanmaraş İstiklal Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Kahramanmaraş", "city_link": "../sehirler/kahramanmaras.html",
+                "students": "~5.000", "academics": "~100", "language": "Türkçe",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kahramanmaras-sutcu-imam-universitesi",
+                "name": "Kahramanmaraş Sütçü İmam Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Kahramanmaraş", "city_link": "../sehirler/kahramanmaras.html",
+                "students": "~35.000", "academics": "~700", "language": "Türkçe",
+                "ranks": { "urap_tr": "69", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 15          /////////////////////////////////////////
+
+
+,
+            {
+                "id": "karabuk-universitesi",
+                "name": "Karabük Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Karabük", "city_link": "../sehirler/karabuk.html",
+                "students": "~45.000", "academics": "~500", "language": "Türkçe",
+                "ranks": { "urap_tr": "60", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "karadeniz-teknik-universitesi",
+                "name": "Karadeniz Teknik Üniversitesi",
+                "year": "1955", "type": "Devlet", "city": "Trabzon", "city_link": "../sehirler/trabzon.html",
+                "students": "~30.000", "academics": "~1.100", "language": "Türkçe",
+                "ranks": { "urap_tr": "22", "urap_world": "1319", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "karamanoglu-mehmetbey-universitesi",
+                "name": "Karamanoğlu Mehmetbey Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Karaman", "city_link": "../sehirler/karaman.html",
+                "students": "~18.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "100", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kars-kafkas-universitesi",
+                "name": "Kars Kafkas Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Kars", "city_link": "../sehirler/kars.html",
+                "students": "~18.000", "academics": "~450", "language": "Türkçe",
+                "ranks": { "urap_tr": "93", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kastamonu-universitesi",
+                "name": "Kastamonu Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Kastamonu", "city_link": "../sehirler/kastamonu.html",
+                "students": "~25.000", "academics": "~450", "language": "Türkçe",
+                "ranks": { "urap_tr": "94", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kayseri-universitesi",
+                "name": "Kayseri Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Kayseri", "city_link": "../sehirler/kayseri.html",
+                "students": "~15.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "159", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kto-karatay-universitesi",
+                "name": "KTO Karatay Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "Konya", "city_link": "../sehirler/konya.html",
+                "students": "~9.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "113", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kilis-7-aralik-universitesi",
+                "name": "Kilis 7 Aralık Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Kilis", "city_link": "../sehirler/kilis.html",
+                "students": "~11.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "116", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kirikkale-universitesi",
+                "name": "Kırıkkale Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Kırıkkale", "city_link": "../sehirler/kirikkale.html",
+                "students": "~35.000", "academics": "~700", "language": "Türkçe",
+                "ranks": { "urap_tr": "78", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kirklareli-universitesi",
+                "name": "Kırklareli Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Kırklareli", "city_link": "../sehirler/kirklareli.html",
+                "students": "~25.000", "academics": "~400", "language": "Türkçe",
+                "ranks": { "urap_tr": "104", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+,
+
+
+//////////////////////////////////       Bölüm 16          /////////////////////////////////////////
+
+,
+            {
+                "id": "kirsehir-ahi-evran-universitesi",
+                "name": "Kırşehir Ahi Evran Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Kırşehir", "city_link": "../sehirler/kirsehir.html",
+                "students": "~20.000", "academics": "~450", "language": "Türkçe",
+                "ranks": { "urap_tr": "84", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kocaeli-universitesi",
+                "name": "Kocaeli Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Kocaeli", "city_link": "../sehirler/kocaeli.html",
+                "students": "~65.000", "academics": "~1.200", "language": "Türkçe",
+                "ranks": { "urap_tr": "26", "urap_world": "1381", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "koc-universitesi",
+                "name": "Koç Üniversitesi",
+                "year": "1993", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~9.000", "academics": "~650", "language": "İngilizce",
+                "ranks": { "urap_tr": "3", "urap_world": "566", "qs_tr": "1", "qs_world": "401", "the_tr": "1", "the_world": "351-400" }
+            },
+            {
+                "id": "konya-gida-ve-tarim-universitesi",
+                "name": "Konya Gıda ve Tarım Üniversitesi",
+                "year": "2013", "type": "Vakıf", "city": "Konya", "city_link": "../sehirler/konya.html",
+                "students": "~1.000", "academics": "~100", "language": "İngilizce",
+                "ranks": { "urap_tr": "157", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "konya-teknik-universitesi",
+                "name": "Konya Teknik Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Konya", "city_link": "../sehirler/konya.html",
+                "students": "~20.000", "academics": "~400", "language": "Türkçe",
+                "ranks": { "urap_tr": "62", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kto-karatay-universitesi",
+                "name": "KTO Karatay Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "Konya", "city_link": "../sehirler/konya.html",
+                "students": "~9.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "113", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kutahya-dumlupinar-universitesi",
+                "name": "Kütahya Dumlupınar Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Kütahya", "city_link": "../sehirler/kutahya.html",
+                "students": "~40.000", "academics": "~650", "language": "Türkçe",
+                "ranks": { "urap_tr": "79", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "kutahya-saglik-bilimleri-universitesi",
+                "name": "Kütahya Sağlık Bilimleri Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Kütahya", "city_link": "../sehirler/kutahya.html",
+                "students": "~7.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "141", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 17          /////////////////////////////////////////
+
+,
+            {
+                "id": "malatya-turgut-ozal-universitesi",
+                "name": "Malatya Turgut Özal Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Malatya", "city_link": "../sehirler/malatya.html",
+                "students": "~10.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "148", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "manisa-celal-bayar-universitesi",
+                "name": "Manisa Celal Bayar Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Manisa", "city_link": "../sehirler/manisa.html",
+                "students": "~50.000", "academics": "~950", "language": "Türkçe",
+                "ranks": { "urap_tr": "53", "urap_world": "1972", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "mardin-artuklu-universitesi",
+                "name": "Mardin Artuklu Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Mardin", "city_link": "../sehirler/mardin.html",
+                "students": "~15.000", "academics": "~280", "language": "Türkçe",
+                "ranks": { "urap_tr": "133", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "marmara-universitesi",
+                "name": "Marmara Üniversitesi",
+                "year": "1883", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~70.000", "academics": "~1.800", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "16", "urap_world": "1136", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "mef-universitesi",
+                "name": "MEF Üniversitesi",
+                "year": "2012", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~3.000", "academics": "~100", "language": "İngilizce",
+                "ranks": { "urap_tr": "149", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "mersin-universitesi",
+                "name": "Mersin Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Mersin", "city_link": "../sehirler/mersin.html",
+                "students": "~35.000", "academics": "~900", "language": "Türkçe",
+                "ranks": { "urap_tr": "43", "urap_world": "1774", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "mimar-sinan-guzel-sanatlar-universitesi",
+                "name": "Mimar Sinan Güzel Sanatlar Üniversitesi",
+                "year": "1882", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~6.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "124", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "mugla-sitki-kocman-universitesi",
+                "name": "Muğla Sıtkı Koçman Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Muğla", "city_link": "../sehirler/mugla.html",
+                "students": "~45.000", "academics": "~800", "language": "Türkçe",
+                "ranks": { "urap_tr": "67", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 18          /////////////////////////////////////////
+
+,
+            {
+                "id": "munzur-universitesi",
+                "name": "Munzur Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Tunceli", "city_link": "../sehirler/tunceli.html",
+                "students": "~8.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "153", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "mus-alparslan-universitesi",
+                "name": "Muş Alparslan Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Muş", "city_link": "../sehirler/mus.html",
+                "students": "~10.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "143", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "necmettin-erbakan-universitesi",
+                "name": "Necmettin Erbakan Üniversitesi",
+                "year": "2010", "type": "Devlet", "city": "Konya", "city_link": "../sehirler/konya.html",
+                "students": "~40.000", "academics": "~1.000", "language": "Türkçe",
+                "ranks": { "urap_tr": "37", "urap_world": "1667", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "nevsehir-haci-bektas-veli-universitesi",
+                "name": "Nevşehir Hacı Bektaş Veli Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Nevşehir", "city_link": "../sehirler/nevsehir.html",
+                "students": "~20.000", "academics": "~400", "language": "Türkçe",
+                "ranks": { "urap_tr": "98", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "nigde-omer-halisdemir-universitesi",
+                "name": "Niğde Ömer Halisdemir Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Niğde", "city_link": "../sehirler/nigde.html",
+                "students": "~28.000", "academics": "~500", "language": "Türkçe",
+                "ranks": { "urap_tr": "72", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "nisantasi-universitesi",
+                "name": "Nişantaşı Üniversitesi",
+                "year": "2012", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~30.000", "academics": "~350", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "160", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "nuh-naci-yazgan-universitesi",
+                "name": "Nuh Naci Yazgan Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "Kayseri", "city_link": "../sehirler/kayseri.html",
+                "students": "~5.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "163", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ondokuz-mayis-universitesi",
+                "name": "Ondokuz Mayıs Üniversitesi",
+                "year": "1975", "type": "Devlet", "city": "Samsun", "city_link": "../sehirler/samsun.html",
+                "students": "~50.000", "academics": "~1.300", "language": "Türkçe",
+                "ranks": { "urap_tr": "29", "urap_world": "1473", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 19          /////////////////////////////////////////
+
+,
+            {
+                "id": "ordu-universitesi",
+                "name": "Ordu Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Ordu", "city_link": "../sehirler/ordu.html",
+                "students": "~22.000", "academics": "~450", "language": "Türkçe",
+                "ranks": { "urap_tr": "91", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "orta-dogu-teknik-universitesi",
+                "name": "Orta Doğu Teknik Üniversitesi",
+                "year": "1956", "type": "Devlet", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~25.000", "academics": "~1.500", "language": "İngilizce",
+                "ranks": { "urap_tr": "1", "urap_world": "336", "qs_tr": "3", "qs_world": "312", "the_tr": "3", "the_world": "351-400" }
+            },
+            {
+                "id": "osmaniye-korkut-ata-universitesi",
+                "name": "Osmaniye Korkut Ata Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Osmaniye", "city_link": "../sehirler/osmaniye.html",
+                "students": "~15.000", "academics": "~300", "language": "Türkçe",
+                "ranks": { "urap_tr": "101", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ostim-teknik-universitesi",
+                "name": "OSTİM Teknik Üniversitesi",
+                "year": "2017", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~8.270", "academics": "~150", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ozyegin-universitesi",
+                "name": "Özyeğin Üniversitesi",
+                "year": "2007", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~10.000", "academics": "~400", "language": "İngilizce",
+                "ranks": { "urap_tr": "20", "urap_world": "1258", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "6", "the_world": "601-800" }
+            },
+            {
+                "id": "pamukkale-universitesi",
+                "name": "Pamukkale Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Denizli", "city_link": "../sehirler/denizli.html",
+                "students": "~45.000", "academics": "~900", "language": "Türkçe",
+                "ranks": { "urap_tr": "48", "urap_world": "1897", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "piri-reis-universitesi",
+                "name": "Piri Reis Üniversitesi",
+                "year": "2008", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~4.000", "academics": "~100", "language": "İngilizce",
+                "ranks": { "urap_tr": "158", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "recep-tayyip-erdogan-universitesi",
+                "name": "Recep Tayyip Erdoğan Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Rize", "city_link": "../sehirler/rize.html",
+                "students": "~18.000", "academics": "~450", "language": "Türkçe",
+                "ranks": { "urap_tr": "76", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 20          /////////////////////////////////////////
+
+,
+            {
+                "id": "sabanci-universitesi",
+                "name": "Sabancı Üniversitesi",
+                "year": "1996", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~5.000", "academics": "~300", "language": "İngilizce",
+                "ranks": { "urap_tr": "7", "urap_world": "874", "qs_tr": "4", "qs_world": "516", "the_tr": "2", "the_world": "351-400" }
+            },
+            {
+                "id": "saglik-bilimleri-universitesi",
+                "name": "Sağlık Bilimleri Üniversitesi",
+                "year": "2015", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~25.000", "academics": "~1.200", "language": "Türkçe",
+                "ranks": { "urap_tr": "36", "urap_world": "1630", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "sakarya-uygulamali-bilimler-universitesi",
+                "name": "Sakarya Uygulamalı Bilimler Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Sakarya", "city_link": "../sehirler/sakarya.html",
+                "students": "~25.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "146", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "sakarya-universitesi",
+                "name": "Sakarya Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Sakarya", "city_link": "../sehirler/sakarya.html",
+                "students": "~50.000", "academics": "~900", "language": "Türkçe",
+                "ranks": { "urap_tr": "42", "urap_world": "1772", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "samsun-universitesi",
+                "name": "Samsun Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Samsun", "city_link": "../sehirler/samsun.html",
+                "students": "~8.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "144", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "sanko-universitesi",
+                "name": "SANKO Üniversitesi",
+                "year": "2013", "type": "Vakıf", "city": "Gaziantep", "city_link": "../sehirler/gaziantep.html",
+                "students": "~1.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "161", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "selcuk-universitesi",
+                "name": "Selçuk Üniversitesi",
+                "year": "1975", "type": "Devlet", "city": "Konya", "city_link": "../sehirler/konya.html",
+                "students": "~65.000", "academics": "~1.300", "language": "Türkçe",
+                "ranks": { "urap_tr": "24", "urap_world": "1368", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "siirt-universitesi",
+                "name": "Siirt Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Siirt", "city_link": "../sehirler/siirt.html",
+                "students": "~12.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "147", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+,
+
+
+//////////////////////////////////       Bölüm 21          /////////////////////////////////////////
+
+,
+            {
+                "id": "sinop-universitesi",
+                "name": "Sinop Üniversitesi",
+                "year": "2007", "type": "Devlet", "city": "Sinop", "city_link": "../sehirler/sinop.html",
+                "students": "~12.000", "academics": "~250", "language": "Türkçe",
+                "ranks": { "urap_tr": "119", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "sivas-bilim-ve-teknoloji-universitesi",
+                "name": "Sivas Bilim ve Teknoloji Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Sivas", "city_link": "../sehirler/sivas.html",
+                "students": "~1.000", "academics": "~100", "language": "İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "sivas-cumhuriyet-universitesi",
+                "name": "Sivas Cumhuriyet Üniversitesi",
+                "year": "1974", "type": "Devlet", "city": "Sivas", "city_link": "../sehirler/sivas.html",
+                "students": "~45.000", "academics": "~950", "language": "Türkçe",
+                "ranks": { "urap_tr": "51", "urap_world": "1928", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "suleyman-demirel-universitesi",
+                "name": "Süleyman Demirel Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Isparta", "city_link": "../sehirler/isparta.html",
+                "students": "~55.000", "academics": "~1.100", "language": "Türkçe",
+                "ranks": { "urap_tr": "35", "urap_world": "1604", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "sirnak-universitesi",
+                "name": "Şırnak Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Şırnak", "city_link": "../sehirler/sirnak.html",
+                "students": "~6.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "168", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "tarsus-universitesi",
+                "name": "Tarsus Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Mersin", "city_link": "../sehirler/mersin.html",
+                "students": "~10.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "164", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "ted-universitesi",
+                "name": "TED Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~5.000", "academics": "~200", "language": "İngilizce",
+                "ranks": { "urap_tr": "73", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "tekirdag-namik-kemal-universitesi",
+                "name": "Tekirdağ Namık Kemal Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Tekirdağ", "city_link": "../sehirler/tekirdag.html",
+                "students": "~35.000", "academics": "~750", "language": "Türkçe",
+                "ranks": { "urap_tr": "64", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+
+,
+
+
+//////////////////////////////////       Bölüm 22          /////////////////////////////////////////
+
+
+,
+            {
+                "id": "tobb-ekonomi-ve-teknoloji-universitesi",
+                "name": "TOBB Ekonomi ve Teknoloji Üniversitesi",
+                "year": "2003", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~6.000", "academics": "~300", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "21", "urap_world": "1279", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "10", "the_world": "1001-1200" }
+            },
+            {
+                "id": "tokat-gaziosmanpasa-universitesi",
+                "name": "Tokat Gaziosmanpaşa Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Tokat", "city_link": "../sehirler/tokat.html",
+                "students": "~32.000", "academics": "~600", "language": "Türkçe",
+                "ranks": { "urap_tr": "73", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "toros-universitesi",
+                "name": "Toros Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "Mersin", "city_link": "../sehirler/mersin.html",
+                "students": "~4.000", "academics": "~150", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "155", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "trabzon-universitesi",
+                "name": "Trabzon Üniversitesi",
+                "year": "2018", "type": "Devlet", "city": "Trabzon", "city_link": "../sehirler/trabzon.html",
+                "students": "~15.000", "academics": "~400", "language": "Türkçe",
+                "ranks": { "urap_tr": "126", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "trakya-universitesi",
+                "name": "Trakya Üniversitesi",
+                "year": "1982", "type": "Devlet", "city": "Edirne", "city_link": "../sehirler/edirne.html",
+                "students": "~37.000", "academics": "~800", "language": "Türkçe",
+                "ranks": { "urap_tr": "56", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "tunceli-munzur-universitesi",
+                "name": "Tunceli Munzur Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Tunceli", "city_link": "../sehirler/tunceli.html",
+                "students": "~8.000", "academics": "~150", "language": "Türkçe",
+                "ranks": { "urap_tr": "153", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "turk-alman-universitesi",
+                "name": "Türk-Alman Üniversitesi",
+                "year": "2010", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~5.000", "academics": "~200", "language": "Almanca / İngilizce",
+                "ranks": { "urap_tr": "87", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "turk-hava-kurumu-universitesi",
+                "name": "Türk Hava Kurumu Üniversitesi",
+                "year": "2011", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~3.100", "academics": "~150", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "118", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "turk-japon-bilim-ve-teknoloji-universitesi",
+                "name": "Türk-Japon Bilim ve Teknoloji Üniversitesi",
+                "year": "2017", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "Veri Yok (Yeni)", "academics": "Veri Yok", "language": "İngilizce",
+                "ranks": { "urap_tr": "Listelenmiyor", "urap_world": "Listelenmiyor", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "usak-universitesi",
+                "name": "Uşak Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Uşak", "city_link": "../sehirler/usak.html",
+                "students": "~30.000", "academics": "~450", "language": "Türkçe",
+                "ranks": { "urap_tr": "89", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "van-yuzuncu-yil-universitesi",
+                "name": "Van Yüzüncü Yıl Üniversitesi",
+                "year": "1982", "type": "Devlet", "city": "Van", "city_link": "../sehirler/van.html",
+                "students": "~28.000", "academics": "~850", "language": "Türkçe",
+                "ranks": { "urap_tr": "47", "urap_world": "1883", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "yalova-universitesi",
+                "name": "Yalova Üniversitesi",
+                "year": "2008", "type": "Devlet", "city": "Yalova", "city_link": "../sehirler/yalova.html",
+                "students": "~16.000", "academics": "~300", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "94", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "yasar-universitesi",
+                "name": "Yaşar Üniversitesi",
+                "year": "2001", "type": "Vakıf", "city": "İzmir", "city_link": "../sehirler/izmir.html",
+                "students": "~9.000", "academics": "~350", "language": "İngilizce",
+                "ranks": { "urap_tr": "58", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "yeditepe-universitesi",
+                "name": "Yeditepe Üniversitesi",
+                "year": "1996", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~20.000", "academics": "~800", "language": "İngilizce",
+                "ranks": { "urap_tr": "22", "urap_world": "1309", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "yeni-yuzyil-universitesi",
+                "name": "Yeni Yüzyıl Üniversitesi",
+                "year": "2009", "type": "Vakıf", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~10.000", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "166", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "yildiz-teknik-universitesi",
+                "name": "Yıldız Teknik Üniversitesi",
+                "year": "1911", "type": "Devlet", "city": "İstanbul", "city_link": "../sehirler/istanbul.html",
+                "students": "~35.000", "academics": "~1.100", "language": "Türkçe / İngilizce",
+                "ranks": { "urap_tr": "20", "urap_world": "1256", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "yozgat-bozok-universitesi",
+                "name": "Yozgat Bozok Üniversitesi",
+                "year": "2006", "type": "Devlet", "city": "Yozgat", "city_link": "../sehirler/yozgat.html",
+                "students": "~20.000", "academics": "~400", "language": "Türkçe",
+                "ranks": { "urap_tr": "88", "urap_world": "2501-3000", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "yuksek-ihtisas-universitesi",
+                "name": "Yüksek İhtisas Üniversitesi",
+                "year": "2016", "type": "Vakıf", "city": "Ankara", "city_link": "../sehirler/ankara.html",
+                "students": "~2.500", "academics": "~200", "language": "Türkçe",
+                "ranks": { "urap_tr": "120", "urap_world": "3000+", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            },
+            {
+                "id": "zonguldak-bulent-ecevit-universitesi",
+                "name": "Zonguldak Bülent Ecevit Üniversitesi",
+                "year": "1992", "type": "Devlet", "city": "Zonguldak", "city_link": "../sehirler/zonguldak.html",
+                "students": "~32.000", "academics": "~650", "language": "Türkçe",
+                "ranks": { "urap_tr": "55", "urap_world": "2001-2500", "qs_tr": "Listelenmiyor", "qs_world": "Listelenmiyor", "the_tr": "Listelenmiyor", "the_world": "Listelenmiyor" }
+            }
+
+
+,
+
+
+//////////////////////////////////       Bölüm 23          /////////////////////////////////////////
+
+
+
+
+
+,
+
+
+//////////////////////////////////       Bölüm 24          /////////////////////////////////////////
+
+
+
+
+
+,
+
+
+//////////////////////////////////       Bölüm 25          /////////////////////////////////////////
+
+
+
+
+
+            // ... Diğer tüm üniversitelerin verileri buraya eklenecek.
+        ];
+        
+        // === SAYFAYI OLUŞTURAN VE FİLTRELEYEN KOD (Bu kısma dokunmanıza gerek yok) ===
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("university-list-container");
+            const cityFilter = document.getElementById("cityFilter");
+            const typeFilter = document.getElementById("typeFilter");
+            const nameSearch = document.getElementById("nameSearch");
+
+            // Şehir filtresini otomatik doldur
+            const cities = [...new Set(universityData.map(uni => uni.city))].sort((a, b) => a.localeCompare(b, 'tr'));
+            cities.forEach(city => {
+                const option = document.createElement("option");
+                option.value = city;
+                option.textContent = city;
+                cityFilter.appendChild(option);
+            });
+
+            function renderCards(filteredData) {
+                container.innerHTML = "";
+                const dataToRender = filteredData.length > 20 ? filteredData.slice(0, 20) : filteredData; // Performans için ilk 20'yi göster
+                
+                if (dataToRender.length === 0) {
+                    container.innerHTML = "<p>Filtreye uygun üniversite bulunamadı.</p>";
+                    return;
+                }
+
+                dataToRender.forEach(uni => {
+                    const cardHTML = `
+                    <div class="university-card" id="${uni.id}">
+                        <h3>${uni.name}</h3>
+                        <div class="inner-box">
+                            <p class="box-title">Temel Bilgiler</p>
+                            <ul class="uni-details">
+                                <li><strong>Kuruluş Yılı:</strong> ${uni.year}</li>
+                                <li><strong>Üniversite Türü:</strong> ${uni.type}</li>
+                                <li><strong>Eğitim Dili:</strong> ${uni.language}</li>
+                                <li><strong>Konum:</strong> <a href="${uni.city_link}" style="font-weight:bold; color:#3498db;">${uni.city}</a></li>
+                            </ul>
+                        </div>
+                        <div class="inner-box">
+                             <p class="box-title">Sayısal Veriler (Kaynak: YÖK Atlas)</p>
+                             <ul class="uni-details">
+                                <li><strong>Toplam Öğrenci:</strong> ${uni.students}</li>
+                                <li><strong>Doktoralı Akademisyen:</strong> ${uni.academics}</li>
+                             </ul>
+                        </div>
+                        <div class="inner-box">
+                            <p class="box-title">Başarı Sıralamaları (2024)</p>
+                            <table class="data-table">
+                                <thead><tr><th>Kaynak</th><th>Türkiye</th><th>Dünya</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>URAP</strong></td><td>${uni.ranks.urap_tr}</td><td>${uni.ranks.urap_world}</td></tr>
+                                    <tr><td><strong>QS World</strong></td><td>${uni.ranks.qs_tr}</td><td>${uni.ranks.qs_world}</td></tr>
+                                    <tr><td><strong>THE World</strong></td><td>${uni.ranks.the_tr}</td><td>${uni.ranks.the_world}</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>`;
+                    container.innerHTML += cardHTML;
+                });
+            }
+
+            function filterAndRender() {
+                const nameQuery = nameSearch.value.toLocaleUpperCase('tr-TR');
+                const cityQuery = cityFilter.value;
+                const typeQuery = typeFilter.value;
+
+                let filtered = universityData.filter(uni => {
+                    const nameMatch = uni.name.toLocaleUpperCase('tr-TR').includes(nameQuery);
+                    const cityMatch = !cityQuery || uni.city === cityQuery;
+                    const typeMatch = !typeQuery || uni.type === typeQuery;
+                    return nameMatch && cityMatch && typeMatch;
+                });
+                renderCards(filtered);
+            }
+
+            nameSearch.addEventListener('keyup', filterAndRender);
+            cityFilter.addEventListener('change', filterAndRender);
+            typeFilter.addEventListener('change', filterAndRender);
+            
+            // İlk yüklemede tüm kartları (ilk 20'sini) göster
+            renderCards(universityData);
+        });
+    </script>
+</body>
+</html>

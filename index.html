@@ -155,7 +155,6 @@
 
     <div class="konteyner">
         
-        <!-- ESKİ BAĞLANTILAR (HİÇBİR ŞEY BOZULMADI) -->
         <div class="hizli-erisim-grid">
             <a href="sehirler/index.html" class="nav-kart">
                 <div class="nav-buton">📍 Şehir Rehberleri</div>
@@ -170,11 +169,10 @@
 
         <hr class="ayirici">
 
-        <!-- YENİ LİYAKAT MOTORU (2026 VİZYONU) -->
         <h2 class="motor-baslik">Dünya Sıralamaları & <span>Liyakat Motoru</span></h2>
         
         <div class="filtre-alani">
-            <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ)...">
+            <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ, Tıp)...">
             <button onclick="sonuclariFiltrele()">Sonuçları Getir</button>
         </div>
 
@@ -197,17 +195,40 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 yks tercih</p>
+        <p>&copy; 2026 YKS Tercih</p>
     </footer>
 
     <script>
-        // Yeni motorun test verileri (eski link yollarını kullanır, hata vermez)
         const universiteVerileri = [
             {
-                id: 1, isim: "Orta Doğu Teknik Üniversitesi", universiteLink: "universiteler/odtu.html", bolum: "Mühendislik & Temel Bilimler", kadro: "%95 Tam Zamanlı", urap: "431", qs: "285", the: "351-400"
+                id: 1, isim: "Orta Doğu Teknik Üniversitesi (ODTÜ)", universiteLink: "universiteler/odtu.html", bolum: "Mühendislik & Temel Bilimler", kadro: "%95 Tam Zamanlı", urap: "431", qs: "285", the: "351-400"
             },
             {
-                id: 2, isim: "Ankara Üniversitesi", universiteLink: "universiteler/ankara-uni.html", bolum: "Tıp & Sosyal Bilimler", kadro: "%90 Tam Zamanlı", urap: "782", qs: "801-850", the: "801-1000"
+                id: 2, isim: "Hacettepe Üniversitesi", universiteLink: "universiteler/hacettepe.html", bolum: "Tıp & Sağlık Bilimleri", kadro: "%98 Tam Zamanlı", urap: "524", qs: "751-800", the: "601-800"
+            },
+            {
+                id: 3, isim: "İstanbul Teknik Üniversitesi (İTÜ)", universiteLink: "universiteler/itu.html", bolum: "Mühendislik & Mimarlık", kadro: "%92 Tam Zamanlı", urap: "502", qs: "326", the: "501-600"
+            },
+            {
+                id: 4, isim: "Ankara Üniversitesi", universiteLink: "universiteler/ankara-uni.html", bolum: "Hukuk, Tıp & Sosyal Bil.", kadro: "%90 Tam Zamanlı", urap: "782", qs: "801-850", the: "801-1000"
+            },
+            {
+                id: 5, isim: "Koç Üniversitesi", universiteLink: "universiteler/koc.html", bolum: "Mühendislik & İdari Bilimler", kadro: "%88 Tam Zamanlı", urap: "1032", qs: "401", the: "351-400"
+            },
+            {
+                id: 6, isim: "Bilkent Üniversitesi", universiteLink: "universiteler/bilkent.html", bolum: "Mühendislik & İktisat", kadro: "%85 Tam Zamanlı", urap: "1235", qs: "502", the: "601-800"
+            },
+            {
+                id: 7, isim: "Gazi Üniversitesi", universiteLink: "universiteler/gazi.html", bolum: "Eğitim, Tıp & Mühendislik", kadro: "%89 Tam Zamanlı", urap: "852", qs: "901-950", the: "1001-1200"
+            },
+            {
+                id: 8, isim: "Boğaziçi Üniversitesi", universiteLink: "universiteler/bogazici.html", bolum: "Temel Bilimler & İdari Bil.", kadro: "%86 Tam Zamanlı", urap: "884", qs: "418", the: "601-800"
+            },
+            {
+                id: 9, isim: "Yıldız Teknik Üniversitesi (YTÜ)", universiteLink: "universiteler/ytu.html", bolum: "Mühendislik & Mimarlık", kadro: "%87 Tam Zamanlı", urap: "931", qs: "851-900", the: "1001-1200"
+            },
+            {
+                id: 10, isim: "Örnek Yeni Vakıf Üniversitesi", universiteLink: "#", bolum: "Genel Bölümler", kadro: "%40 Tam Zamanlı", urap: "Listelenmiyor", qs: "Listelenmiyor", the: "Listelenmiyor"
             }
         ];
 
@@ -243,7 +264,6 @@
             tabloyuCiz(filtrelenmis);
         }
 
-        // Sayfa yüklendiğinde tabloyu doldur
         window.onload = () => tabloyuCiz(universiteVerileri);
     </script>
 </body>

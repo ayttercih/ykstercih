@@ -229,3 +229,49 @@
 
             // ANADOLU'NUN BÜYÜK DEVLETLERİ
             { id: 17, isim: "Erciyes Üniversitesi (Kayseri)", universiteLink: "universiteler/erciyes.html", bolum: "Tıp & Mühendislik", kadro: "%86 Tam Zamanlı", urap: "1100", qs: "1201-1400", the: "1001-1200" },
+            { id: 18, isim: "Karadeniz Teknik Üniversitesi (Trabzon)", universiteLink: "universiteler/ktu.html", bolum: "Mühendislik & Orman", kadro: "%87 Tam Zamanlı", urap: "1300", qs: "Listelenmiyor", the: "1501+" },
+            { id: 19, isim: "Çukurova Üniversitesi (Adana)", universiteLink: "universiteler/cukurova.html", bolum: "Ziraat, Tıp & Mühendislik", kadro: "%88 Tam Zamanlı", urap: "1250", qs: "1201-1400", the: "1201-1500" },
+            { id: 20, isim: "Akdeniz Üniversitesi (Antalya)", universiteLink: "universiteler/akdeniz.html", bolum: "Tıp & Turizm", kadro: "%85 Tam Zamanlı", urap: "1200", qs: "1201-1400", the: "1501+" },
+            { id: 21, isim: "Anadolu Üniversitesi (Eskişehir)", universiteLink: "universiteler/anadolu.html", bolum: "İletişim, Havacılık & AÖF", kadro: "%80 Tam Zamanlı", urap: "1600", qs: "1201-1400", the: "1201-1500" },
+            { id: 22, isim: "Atatürk Üniversitesi (Erzurum)", universiteLink: "universiteler/ataturk.html", bolum: "Genel Kapsamlı (Tıp/Ziraat)", kadro: "%90 Tam Zamanlı", urap: "1350", qs: "Listelenmiyor", the: "1501+" },
+            { id: 23, isim: "Ondokuz Mayıs Üniversitesi (Samsun)", universiteLink: "universiteler/omu.html", bolum: "Tıp, Eğitim & Ziraat", kadro: "%86 Tam Zamanlı", urap: "1400", qs: "1401+", the: "1501+" },
+            { id: 24, isim: "Gebze Teknik Üniversitesi (Kocaeli)", universiteLink: "universiteler/gtu.html", bolum: "İleri Mühendislik & Temel Bil.", kadro: "%82 Tam Zamanlı", urap: "1500", qs: "Listelenmiyor", the: "Listelenmiyor" },
+            { id: 25, isim: "Çanakkale Onsekiz Mart Üniversitesi", universiteLink: "universiteler/comu.html", bolum: "Arkeoloji, Tarih & Ziraat", kadro: "%84 Tam Zamanlı", urap: "1652", qs: "Listelenmiyor", the: "Listelenmiyor" }
+        ];
+
+        function veriFormatla(deger) {
+            return deger === "Listelenmiyor" ? `<span class="listelenmiyor">Yok</span>` : `<strong>${deger}</strong>`;
+        }
+
+        function tabloyuCiz(veriler) {
+            const tablo = document.getElementById("sonucTablosu");
+            tablo.innerHTML = "";
+            veriler.forEach(veri => {
+                tablo.innerHTML += `
+                    <tr>
+                        <td><strong>${veri.isim}</strong></td>
+                        <td>${veri.bolum}</td>
+                        <td>
+                            <div class="rank-kutu">
+                                <div class="rank-satir"><span class="rank-isim">URAP:</span> ${veriFormatla(veri.urap)}</div>
+                                <div class="rank-satir"><span class="rank-isim">QS:</span> ${veriFormatla(veri.qs)}</div>
+                                <div class="rank-satir"><span class="rank-isim">THE:</span> ${veriFormatla(veri.the)}</div>
+                            </div>
+                        </td>
+                        <td style="font-weight:bold; color:#FF6B35;">${veri.kadro}</td>
+                        <td><a href="${veri.universiteLink}" class="detay-buton">Detaylar</a></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function sonuclariFiltrele() {
+            const arama = document.getElementById("aramaKutusu").value.toLowerCase();
+            const filtrelenmis = universiteVerileri.filter(v => v.isim.toLowerCase().includes(arama) || v.bolum.toLowerCase().includes(arama));
+            tabloyuCiz(filtrelenmis);
+        }
+
+        window.onload = () => tabloyuCiz(universiteVerileri);
+    </script>
+</body>
+</html>

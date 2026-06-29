@@ -3,157 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YKS Tercih Rehberi - Ana Sayfa</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>YKS Tercih Rehberi 2026 | Objektif Veri Motoru</title>
     
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1000px;
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .banner {
-            background-color: #004a99;
-            color: #ffffff;
-            border-radius: 12px;
-            padding: 50px 30px;
-            margin-bottom: 50px;
-            box-shadow: 0 8px 25px rgba(0, 74, 153, 0.25);
-        }
-        .banner h1 {
-            font-size: 3em;
-            font-weight: 700;
-            margin: 0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-        .banner p {
-            font-size: 1.1em;
-            margin-top: 10px;
-            opacity: 0.9;
-            font-weight: 400;
+        /* YENİ NESİL KONTRASTLI TASARIM (2026) */
+        :root {
+            --koyu-lacivert: #0A192F;
+            --canli-turuncu: #FF6B35;
+            --acik-mavi: #E8F1F2;
+            --beyaz: #FFFFFF;
+            --uyari-sarisi: #FFD166;
+            --gri-ton: #6c757d;
+            --golge-rengi: rgba(10, 25, 47, 0.15);
         }
 
-        .button-grid {
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--acik-mavi); 
+            color: var(--koyu-lacivert); 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6; 
+        }
+
+        .guncelleme-bandi { 
+            background-color: var(--uyari-sarisi); 
+            color: var(--koyu-lacivert); 
+            text-align: center; 
+            padding: 12px; 
+            font-weight: bold; 
+            font-size: 1.1rem; 
+            border-bottom: 3px solid var(--canli-turuncu); 
+        }
+
+        header { 
+            background-color: var(--koyu-lacivert); 
+            color: var(--beyaz); 
+            padding: 3rem 1rem; 
+            text-align: center; 
+            border-bottom: 5px solid var(--canli-turuncu); 
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 2.8rem; 
+            letter-spacing: 1px; 
+        }
+
+        header p { 
+            color: var(--acik-mavi); 
+            font-size: 1.2rem; 
+            margin-top: 10px; 
+            opacity: 0.9;
+        }
+
+        .konteyner { 
+            max-width: 1100px; 
+            margin: 30px auto; 
+            padding: 30px; 
+            background-color: var(--beyaz); 
+            border-radius: 12px; 
+            box-shadow: 0 8px 25px var(--golge-rengi); 
+        }
+
+        /* ESKİ ANA MENÜ BUTONLARININ YENİ TASARIMI */
+        .hizli-erisim-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
+            margin-bottom: 40px;
         }
+
         @media (max-width: 768px) {
-            .button-grid {
-                grid-template-columns: 1fr;
-            }
+            .hizli-erisim-grid { grid-template-columns: 1fr; }
         }
-        .nav-component {
-            text-decoration: none;
-            color: #333;
-            display: block;
-            border-radius: 12px;
-            background: #ffffff;
+
+        .nav-kart {
+            background-color: var(--acik-mavi);
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .nav-component:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-        }
-        .nav-button {
-            background-color: #3498db;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-weight: 700;
+            border-radius: 10px;
+            text-align: center;
             text-decoration: none;
-            cursor: pointer;
+            color: var(--koyu-lacivert);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-kart:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--golge-rengi);
+            border-color: var(--canli-turuncu);
+        }
+
+        .nav-buton {
+            background-color: var(--koyu-lacivert);
+            color: var(--beyaz);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: bold;
             display: inline-block;
-            margin-bottom: 20px;
-            transition: background-color 0.3s ease;
+            margin-bottom: 15px;
+            transition: 0.3s;
         }
-        .nav-button.navy {
-            background-color: #001f3f;
+
+        .nav-kart:hover .nav-buton { background-color: var(--canli-turuncu); }
+        .nav-kart p { color: var(--gri-ton); font-size: 0.95rem; margin: 0; font-weight: bold; }
+
+        .ayirici { border: 0; height: 2px; background: var(--acik-mavi); margin: 40px 0; }
+
+        /* YENİ MOTOR ALANI */
+        .motor-baslik { color: var(--koyu-lacivert); text-align: center; margin-bottom: 20px; font-size: 1.8rem;}
+        .motor-baslik span { color: var(--canli-turuncu); }
+
+        .filtre-alani { 
+            display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; 
+            background-color: #F8FAFC; padding: 20px; border-radius: 8px; border-left: 5px solid var(--canli-turuncu); 
         }
-        .nav-component:hover .nav-button {
-            background-color: #2980b9;
-        }
-        .nav-component:hover .nav-button.navy {
-            background-color: #003366;
-        }
-        .nav-description {
-            font-size: 0.95em;
-            color: #555;
-            font-weight: 400;
-            line-height: 1.5;
-        }
+
+        .filtre-alani input { padding: 12px; border: 2px solid var(--koyu-lacivert); border-radius: 6px; font-size: 1rem; flex: 1; min-width: 200px; }
+        .filtre-alani button { background-color: var(--canli-turuncu); color: var(--beyaz); border: none; padding: 12px 25px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s;}
+        .filtre-alani button:hover { background-color: var(--koyu-lacivert); }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
+        th, td { padding: 15px; text-align: left; border-bottom: 2px solid var(--acik-mavi); }
+        th { background-color: var(--koyu-lacivert); color: var(--beyaz); }
+        tr:hover { background-color: #F0F4F8; }
         
-        footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            font-size: 0.9em;
-            color: #888;
-            font-weight: 400;
-        }
-        /* EKLENDİ: Beta Notu Stili */
-        .beta-note {
-            font-style: italic;
-            color: #777;
-            margin-top: 30px;
-        }
+        .siralama-etiket { background-color: var(--koyu-lacivert); color: var(--beyaz); padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        
+        .rank-kutu { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
+        .rank-satir { display: flex; justify-content: space-between; background-color: var(--acik-mavi); padding: 3px 6px; border-radius: 4px; }
+        .rank-isim { font-weight: bold; color: var(--koyu-lacivert); }
+        .listelenmiyor { color: var(--gri-ton); font-style: italic; }
+
+        .detay-buton { background-color: var(--acik-mavi); color: var(--koyu-lacivert); border: 2px solid var(--koyu-lacivert); padding: 6px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; text-decoration: none; }
+        .detay-buton:hover { background-color: var(--koyu-lacivert); color: var(--beyaz); }
+
+        footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--acik-mavi); color: var(--gri-ton); font-weight: bold; }
+        .beta-note { font-style: italic; color: var(--gri-ton); margin-top: 30px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="guncelleme-bandi">⚠️ Liyakat ve Objektif Metriklere Dayalı YKS Tercih Rehberimiz Yayında!</div>
+
+    <header>
+        <h1>YKS TERCİH 2026</h1>
+        <p>Türkiye'nin En Kapsamlı Üniversite ve Şehir Lojistik Rehberi</p>
+    </header>
+
+    <div class="konteyner">
         
-        <div class="banner">
-            <h1>YKS Tercih Rehberi</h1>
-            <p>Türkiye'nin en kapsamlı üniversite ve şehir rehberi</p>
+        <!-- ESKİ BAĞLANTILAR (HİÇBİR ŞEY BOZULMADI) -->
+        <div class="hizli-erisim-grid">
+            <a href="sehirler/index.html" class="nav-kart">
+                <div class="nav-buton">📍 Şehir Rehberleri</div>
+                <p>Tüm şehirlerin rehberi, her ilin en kapsamlı ve objektif bilgileri için tıklayın.</p>
+            </a>
+
+            <a href="universiteler/index.html" class="nav-kart">
+                <div class="nav-buton">🎓 Üniversite Rehberleri</div>
+                <p>200'den fazla üniversitenin detaylı kimlik kartlarını görmek için tıklayın.</p>
+            </a>
         </div>
 
-        <main>
-            <div class="button-grid">
-                
-                <a href="sehirler/index.html" class="nav-component">
-                    <div class="nav-button">Şehir Rehberleri</div>
-                    <p class="nav-description">
-                        Tüm şehirlerin rehberi, her ilin en kapsamlı ve objektif bilgileri için tıklayın.
-                    </p>
-                </a>
+        <hr class="ayirici">
 
-                <a href="universiteler/index.html" class="nav-component">
-                    <div class="nav-button navy">Üniversite Rehberleri</div>
-                    <p class="nav-description">
-                        200'den fazla üniversitenin detaylı kimlik kartlarını ve başarı sıralamalarını görmek için tıklayın.
-                    </p>
-                </a>
+        <!-- YENİ LİYAKAT MOTORU (2026 VİZYONU) -->
+        <h2 class="motor-baslik">Dünya Sıralamaları & <span>Liyakat Motoru</span></h2>
+        
+        <div class="filtre-alani">
+            <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ)...">
+            <button onclick="sonuclariFiltrele()">Sonuçları Getir</button>
+        </div>
 
-            </div>
-            
-            <p class="beta-note">
-                Projemiz Beta aşamasındadır ve sürekli olarak geliştirilmektedir. Yakında eklenecek yeni özellikler için takipte kalın!
-            </p>
-        </main>
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Üniversite</th>
+                        <th>Bölüm / Alan</th>
+                        <th>Dünya Sıralaması (URAP/QS/THE)</th>
+                        <th>Akademik Kadro</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody id="sonucTablosu"></tbody>
+            </table>
+        </div>
 
-        <footer>
-            <p>&copy; 2025 yks tercih</p>
-        </footer>
-
+        <p class="beta-note">Projemiz sürekli olarak güncellenmektedir. Lojistik ve akademik kadro verileri eklendikçe motorumuz genişleyecektir.</p>
     </div>
 
+    <footer>
+        <p>&copy; 2026 yks tercih</p>
+    </footer>
+
+    <script>
+        // Yeni motorun test verileri (eski link yollarını kullanır, hata vermez)
+        const universiteVerileri = [
+            {
+                id: 1, isim: "Orta Doğu Teknik Üniversitesi", universiteLink: "universiteler/odtu.html", bolum: "Mühendislik & Temel Bilimler", kadro: "%95 Tam Zamanlı", urap: "431", qs: "285", the: "351-400"
+            },
+            {
+                id: 2, isim: "Ankara Üniversitesi", universiteLink: "universiteler/ankara-uni.html", bolum: "Tıp & Sosyal Bilimler", kadro: "%90 Tam Zamanlı", urap: "782", qs: "801-850", the: "801-1000"
+            }
+        ];
+
+        function veriFormatla(deger) {
+            return deger === "Listelenmiyor" ? `<span class="listelenmiyor">Yok</span>` : `<strong>${deger}</strong>`;
+        }
+
+        function tabloyuCiz(veriler) {
+            const tablo = document.getElementById("sonucTablosu");
+            tablo.innerHTML = "";
+            veriler.forEach(veri => {
+                tablo.innerHTML += `
+                    <tr>
+                        <td><strong>${veri.isim}</strong></td>
+                        <td>${veri.bolum}</td>
+                        <td>
+                            <div class="rank-kutu">
+                                <div class="rank-satir"><span class="rank-isim">URAP:</span> ${veriFormatla(veri.urap)}</div>
+                                <div class="rank-satir"><span class="rank-isim">QS:</span> ${veriFormatla(veri.qs)}</div>
+                                <div class="rank-satir"><span class="rank-isim">THE:</span> ${veriFormatla(veri.the)}</div>
+                            </div>
+                        </td>
+                        <td style="font-weight:bold; color:#FF6B35;">${veri.kadro}</td>
+                        <td><a href="${veri.universiteLink}" class="detay-buton">Detaylar</a></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function sonuclariFiltrele() {
+            const arama = document.getElementById("aramaKutusu").value.toLowerCase();
+            const filtrelenmis = universiteVerileri.filter(v => v.isim.toLowerCase().includes(arama) || v.bolum.toLowerCase().includes(arama));
+            tabloyuCiz(filtrelenmis);
+        }
+
+        // Sayfa yüklendiğinde tabloyu doldur
+        window.onload = () => tabloyuCiz(universiteVerileri);
+    </script>
 </body>
 </html>

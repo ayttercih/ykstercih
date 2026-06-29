@@ -112,9 +112,28 @@
 
         .ayirici { border: 0; height: 2px; background: var(--acik-mavi); margin: 40px 0; }
 
-        /* YENİ MOTOR ALANI */
-        .motor-baslik { color: var(--koyu-lacivert); text-align: center; margin-bottom: 20px; font-size: 1.8rem;}
-        .motor-baslik span { color: var(--canli-turuncu); }
+        /* YENİ: AÇ/KAPA BUTONU (TOGGLE) */
+        .motor-ac-buton {
+            background-color: var(--canli-turuncu);
+            color: var(--beyaz);
+            width: 100%;
+            padding: 18px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .motor-ac-buton:hover { background-color: var(--koyu-lacivert); box-shadow: 0 5px 15px var(--golge-rengi); }
+        .motor-ac-buton.acik { background-color: var(--koyu-lacivert); border-left: 8px solid var(--canli-turuncu); }
+
+        /* MOTOR İÇERİK ALANI (VARSAYILAN OLARAK GİZLİ) */
+        #motorIcerik { display: none; margin-top: 20px; animation: yavascaAcil 0.4s ease-in-out; }
+        @keyframes yavascaAcil { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         .filtre-alani { 
             display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; 
@@ -155,6 +174,7 @@
 
     <div class="konteyner">
         
+        <!-- ESKİ BAĞLANTILAR -->
         <div class="hizli-erisim-grid">
             <a href="sehirler/index.html" class="nav-kart">
                 <div class="nav-buton">📍 Şehir Rehberleri</div>
@@ -169,33 +189,39 @@
 
         <hr class="ayirici">
 
-        <h2 class="motor-baslik">Dünya Sıralamaları & <span>Liyakat Motoru</span></h2>
-        
-        <div class="filtre-alani">
-            <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ, Tıp)...">
-            <button onclick="sonuclariFiltrele()">Sonuçları Getir</button>
-        </div>
+        <!-- YENİ AÇ/KAPA BUTONU -->
+        <button id="motorGosterButon" class="motor-ac-buton" onclick="motoruGosterGizle()">
+            🔍 Dünya Sıralamaları & Liyakat Motorunu Aç
+        </button>
 
-        <div style="overflow-x:auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Üniversite</th>
-                        <th>Bölüm / Alan</th>
-                        <th style="min-width: 280px;">
-                            Dünya Sıralaması<br>
-                            <span style="font-size:0.8rem; font-weight:normal; color:var(--uyari-sarisi);">*Dünyadaki ~30.000 üniversite içinden değerlendirilen havuzlar:</span><br>
-                            <span style="font-size:0.8rem; font-weight:normal; color:var(--acik-mavi);">URAP (İlk 3.000) &nbsp;|&nbsp; QS (İlk 1.500) &nbsp;|&nbsp; THE (İlk 1.900)</span>
-                        </th>
-                        <th>Akademik Kadro</th>
-                        <th>İşlem</th>
-                    </tr>
-                </thead>
-                <tbody id="sonucTablosu"></tbody>
-            </table>
-        </div>
+        <!-- GİZLİ MOTOR ALANI (Butona basılınca açılır) -->
+        <div id="motorIcerik">
+            <div class="filtre-alani">
+                <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ, Tıp)...">
+                <button onclick="sonuclariFiltrele()">Sonuçları Getir</button>
+            </div>
 
-        <p class="beta-note">Projemiz sürekli olarak güncellenmektedir. Lojistik ve akademik kadro verileri eklendikçe motorumuz genişleyecektir.</p>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Üniversite</th>
+                            <th>Bölüm / Alan</th>
+                            <th style="min-width: 280px;">
+                                Dünya Sıralaması<br>
+                                <span style="font-size:0.8rem; font-weight:normal; color:var(--uyari-sarisi);">*Dünyadaki ~30.000 üniversite içinden değerlendirilen havuzlar:</span><br>
+                                <span style="font-size:0.8rem; font-weight:normal; color:var(--acik-mavi);">URAP (İlk 3.000) &nbsp;|&nbsp; QS (İlk 1.500) &nbsp;|&nbsp; THE (İlk 1.900)</span>
+                            </th>
+                            <th>Akademik Kadro</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sonucTablosu"></tbody>
+                </table>
+            </div>
+
+            <p class="beta-note">Projemiz sürekli olarak güncellenmektedir. Lojistik ve akademik kadro verileri eklendikçe motorumuz genişleyecektir.</p>
+        </div>
     </div>
 
     <footer>
@@ -203,17 +229,30 @@
     </footer>
 
     <script>
-        // LİYAKAT MOTORU VERİ TABANI (TÜRKİYE'NİN LOKOMOTİF 25 ÜNİVERSİTESİ)
+        // AÇ/KAPA (TOGGLE) FONKSİYONU
+        function motoruGosterGizle() {
+            const icerik = document.getElementById("motorIcerik");
+            const buton = document.getElementById("motorGosterButon");
+            
+            if (icerik.style.display === "none" || icerik.style.display === "") {
+                icerik.style.display = "block";
+                buton.innerHTML = "❌ Liyakat Motorunu Gizle";
+                buton.classList.add("acik");
+            } else {
+                icerik.style.display = "none";
+                buton.innerHTML = "🔍 Dünya Sıralamaları & Liyakat Motorunu Aç";
+                buton.classList.remove("acik");
+            }
+        }
+
+        // LİYAKAT MOTORU VERİ TABANI
         const universiteVerileri = [
-            // ANKARA EKOLÜ
             { id: 1, isim: "Orta Doğu Teknik Üniversitesi (ODTÜ)", universiteLink: "universiteler/odtu.html", bolum: "Mühendislik & Temel Bilimler", kadro: "%95 Tam Zamanlı", urap: "431", qs: "285", the: "351-400" },
             { id: 2, isim: "Hacettepe Üniversitesi", universiteLink: "universiteler/hacettepe.html", bolum: "Tıp & Sağlık Bilimleri", kadro: "%98 Tam Zamanlı", urap: "524", qs: "751-800", the: "601-800" },
             { id: 3, isim: "Ankara Üniversitesi", universiteLink: "universiteler/ankara-uni.html", bolum: "Hukuk, Tıp & Sosyal Bil.", kadro: "%90 Tam Zamanlı", urap: "782", qs: "801-850", the: "801-1000" },
             { id: 4, isim: "Gazi Üniversitesi", universiteLink: "universiteler/gazi.html", bolum: "Eğitim, Tıp & Mühendislik", kadro: "%89 Tam Zamanlı", urap: "852", qs: "901-950", the: "1001-1200" },
             { id: 5, isim: "Bilkent Üniversitesi", universiteLink: "universiteler/bilkent.html", bolum: "Mühendislik & İktisat", kadro: "%85 Tam Zamanlı", urap: "1235", qs: "502", the: "601-800" },
             { id: 6, isim: "TOBB Ekonomi ve Teknoloji Üni.", universiteLink: "universiteler/tobb.html", bolum: "Mühendislik & İdari Bilimler", kadro: "%80 Tam Zamanlı", urap: "1850", qs: "Listelenmiyor", the: "Listelenmiyor" },
-            
-            // İSTANBUL EKOLÜ
             { id: 7, isim: "İstanbul Teknik Üniversitesi (İTÜ)", universiteLink: "universiteler/itu.html", bolum: "Mühendislik & Mimarlık", kadro: "%92 Tam Zamanlı", urap: "502", qs: "326", the: "501-600" },
             { id: 8, isim: "Boğaziçi Üniversitesi", universiteLink: "universiteler/bogazici.html", bolum: "Temel Bilimler & İdari Bil.", kadro: "%86 Tam Zamanlı", urap: "884", qs: "418", the: "601-800" },
             { id: 9, isim: "Koç Üniversitesi", universiteLink: "universiteler/koc.html", bolum: "Mühendislik & İdari Bilimler", kadro: "%88 Tam Zamanlı", urap: "1032", qs: "401", the: "351-400" },
@@ -221,13 +260,9 @@
             { id: 11, isim: "İstanbul Üniversitesi", universiteLink: "universiteler/istanbul.html", bolum: "Tıp, Hukuk & Edebiyat", kadro: "%94 Tam Zamanlı", urap: "650", qs: "701-750", the: "801-1000" },
             { id: 12, isim: "Marmara Üniversitesi", universiteLink: "universiteler/marmara.html", bolum: "İktisat, İlahiyat & İletişim", kadro: "%85 Tam Zamanlı", urap: "1050", qs: "1001-1200", the: "1201-1500" },
             { id: 13, isim: "Sabancı Üniversitesi", universiteLink: "universiteler/sabanci.html", bolum: "Mühendislik & Yönetim", kadro: "%82 Tam Zamanlı", urap: "1350", qs: "501-550", the: "401-500" },
-
-            // İZMİR EKOLÜ
             { id: 14, isim: "Ege Üniversitesi", universiteLink: "universiteler/ege.html", bolum: "Tıp, Ziraat & Fen", kadro: "%91 Tam Zamanlı", urap: "950", qs: "1001-1200", the: "1001-1200" },
             { id: 15, isim: "Dokuz Eylül Üniversitesi", universiteLink: "universiteler/deu.html", bolum: "Tıp, Mühendislik & Hukuk", kadro: "%88 Tam Zamanlı", urap: "1150", qs: "1201-1400", the: "1201-1500" },
             { id: 16, isim: "İzmir Yüksek Teknoloji Enstitüsü (İYTE)", universiteLink: "universiteler/iyte.html", bolum: "Mimarlık & İleri Teknoloji", kadro: "%84 Tam Zamanlı", urap: "1450", qs: "1201-1400", the: "Listelenmiyor" },
-
-            // ANADOLU'NUN BÜYÜK DEVLETLERİ
             { id: 17, isim: "Erciyes Üniversitesi (Kayseri)", universiteLink: "universiteler/erciyes.html", bolum: "Tıp & Mühendislik", kadro: "%86 Tam Zamanlı", urap: "1100", qs: "1201-1400", the: "1001-1200" },
             { id: 18, isim: "Karadeniz Teknik Üniversitesi (Trabzon)", universiteLink: "universiteler/ktu.html", bolum: "Mühendislik & Orman", kadro: "%87 Tam Zamanlı", urap: "1300", qs: "Listelenmiyor", the: "1501+" },
             { id: 19, isim: "Çukurova Üniversitesi (Adana)", universiteLink: "universiteler/cukurova.html", bolum: "Ziraat, Tıp & Mühendislik", kadro: "%88 Tam Zamanlı", urap: "1250", qs: "1201-1400", the: "1201-1500" },
@@ -271,7 +306,9 @@
             tabloyuCiz(filtrelenmis);
         }
 
-        window.onload = () => tabloyuCiz(universiteVerileri);
+        document.addEventListener("DOMContentLoaded", () => {
+            tabloyuCiz(universiteVerileri);
+        });
     </script>
 </body>
 </html>

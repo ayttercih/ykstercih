@@ -39,8 +39,9 @@
         #motorIcerik { display: none; margin-top: 20px; animation: yavascaAcil 0.4s ease-in-out; }
         @keyframes yavascaAcil { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* YENİ FİLTRE VE SIRALAMA ALANI TASARIMI */
         .filtre-alani { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; background-color: #F8FAFC; padding: 20px; border-radius: 8px; border-left: 5px solid var(--canli-turuncu); }
-        .filtre-alani input { padding: 12px; border: 2px solid var(--koyu-lacivert); border-radius: 6px; font-size: 1rem; flex: 1; min-width: 200px; }
+        .filtre-alani input, .filtre-alani select { padding: 12px; border: 2px solid var(--koyu-lacivert); border-radius: 6px; font-size: 1rem; flex: 1; min-width: 200px; }
         .filtre-alani button { background-color: var(--canli-turuncu); color: var(--beyaz); border: none; padding: 12px 25px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s;}
         .filtre-alani button:hover { background-color: var(--koyu-lacivert); }
 
@@ -87,9 +88,18 @@
         </button>
 
         <div id="motorIcerik">
+            
             <div class="filtre-alani">
-                <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ, Tıp)...">
-                <button onclick="sonuclariFiltrele()">Sonuçları Getir</button>
+                <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ)..." onkeyup="sonuclariFiltrele()">
+                
+                <select id="siralamaKriteri" onchange="sonuclariFiltrele()">
+                    <option value="varsayilan">Sıralama Ölçütü Seçin...</option>
+                    <option value="urap">URAP'a Göre Sırala (En İyi)</option>
+                    <option value="qs">QS'e Göre Sırala (En İyi)</option>
+                    <option value="the">THE'ye Göre Sırala (En İyi)</option>
+                </select>
+
+                <button onclick="sonuclariFiltrele()">Filtrele</button>
             </div>
 
             <div style="overflow-x:auto;">
@@ -119,7 +129,6 @@
         <p>&copy; 2026 YKS Tercih</p>
     </footer>
 
-    <!-- İŞTE SİHRİN GERÇEKLEŞTİĞİ YER: VERİYİ DIŞARIDAN ÇAĞIRIYORUZ -->
     <script src="veri/universiteler.js"></script>
 
     <script>
@@ -162,9 +171,28 @@
             });
         }
 
+        // AKILLI SIRALAMA ALGORİTMASI
+        function sayiyaCevir(deger) {
+            if (deger === "Listelenmiyor" || deger === "Yok") return 999999; // Yok olanları en sona atar
+            return parseInt(deger.split('-')[0].replace(/[^0-9]/g, '')); // "351-400" gibi aralıkların ilk sayısını alır
+        }
+
         function sonuclariFiltrele() {
             const arama = document.getElementById("aramaKutusu").value.toLowerCase();
-            const filtrelenmis = universiteVerileri.filter(v => v.isim.toLowerCase().includes(arama) || v.bolum.toLowerCase().includes(arama));
+            const siralama = document.getElementById("siralamaKriteri").value;
+            
+            // 1. Önce İsme Göre Filtrele
+            let filtrelenmis = universiteVerileri.filter(v => v.isim.toLowerCase().includes(arama) || v.bolum.toLowerCase().includes(arama));
+
+            // 2. Sonra Seçilen Kritere Göre Sırala
+            if (siralama === "urap") {
+                filtrelenmis.sort((a, b) => sayiyaCevir(a.urap) - sayiyaCevir(b.urap));
+            } else if (siralama === "qs") {
+                filtrelenmis.sort((a, b) => sayiyaCevir(a.qs) - sayiyaCevir(b.qs));
+            } else if (siralama === "the") {
+                filtrelenmis.sort((a, b) => sayiyaCevir(a.the) - sayiyaCevir(b.the));
+            }
+
             tabloyuCiz(filtrelenmis);
         }
 

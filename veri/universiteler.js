@@ -1,0 +1,28 @@
+// TÜRKİYE'NİN LOKOMOTİF 25 ÜNİVERSİTESİ (VERİ TABANI)
+const universiteVerileri = [
+    { id: 1, isim: "Orta Doğu Teknik Üniversitesi (ODTÜ)", universiteLink: "universiteler/odtu.html", bolum: "Mühendislik & Temel Bilimler", kadro: "%95 Tam Zamanlı", urap: "431", qs: "285", the: "351-400" },
+    { id: 2, isim: "Hacettepe Üniversitesi", universiteLink: "universiteler/hacettepe.html", bolum: "Tıp & Sağlık Bilimleri", kadro: "%98 Tam Zamanlı", urap: "524", qs: "751-800", the: "601-800" },
+    { id: 3, isim: "Ankara Üniversitesi", universiteLink: "universiteler/ankara-uni.html", bolum: "Hukuk, Tıp & Sosyal Bil.", kadro: "%90 Tam Zamanlı", urap: "782", qs: "801-850", the: "801-1000" },
+    { id: 4, isim: "Gazi Üniversitesi", universiteLink: "universiteler/gazi.html", bolum: "Eğitim, Tıp & Mühendislik", kadro: "%89 Tam Zamanlı", urap: "852", qs: "901-950", the: "1001-1200" },
+    { id: 5, isim: "Bilkent Üniversitesi", universiteLink: "universiteler/bilkent.html", bolum: "Mühendislik & İktisat", kadro: "%85 Tam Zamanlı", urap: "1235", qs: "502", the: "601-800" },
+    { id: 6, isim: "TOBB Ekonomi ve Teknoloji Üni.", universiteLink: "universiteler/tobb.html", bolum: "Mühendislik & İdari Bilimler", kadro: "%80 Tam Zamanlı", urap: "1850", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 7, isim: "İstanbul Teknik Üniversitesi (İTÜ)", universiteLink: "universiteler/itu.html", bolum: "Mühendislik & Mimarlık", kadro: "%92 Tam Zamanlı", urap: "502", qs: "326", the: "501-600" },
+    { id: 8, isim: "Boğaziçi Üniversitesi", universiteLink: "universiteler/bogazici.html", bolum: "Temel Bilimler & İdari Bil.", kadro: "%86 Tam Zamanlı", urap: "884", qs: "418", the: "601-800" },
+    { id: 9, isim: "Koç Üniversitesi", universiteLink: "universiteler/koc.html", bolum: "Mühendislik & İdari Bilimler", kadro: "%88 Tam Zamanlı", urap: "1032", qs: "401", the: "351-400" },
+    { id: 10, isim: "Yıldız Teknik Üniversitesi (YTÜ)", universiteLink: "universiteler/ytu.html", bolum: "Mühendislik & Mimarlık", kadro: "%87 Tam Zamanlı", urap: "931", qs: "851-900", the: "1001-1200" },
+    { id: 11, isim: "İstanbul Üniversitesi", universiteLink: "universiteler/istanbul.html", bolum: "Tıp, Hukuk & Edebiyat", kadro: "%94 Tam Zamanlı", urap: "650", qs: "701-750", the: "801-1000" },
+    { id: 12, isim: "Marmara Üniversitesi", universiteLink: "universiteler/marmara.html", bolum: "İktisat, İlahiyat & İletişim", kadro: "%85 Tam Zamanlı", urap: "1050", qs: "1001-1200", the: "1201-1500" },
+    { id: 13, isim: "Sabancı Üniversitesi", universiteLink: "universiteler/sabanci.html", bolum: "Mühendislik & Yönetim", kadro: "%82 Tam Zamanlı", urap: "1350", qs: "501-550", the: "401-500" },
+    { id: 14, isim: "Ege Üniversitesi", universiteLink: "universiteler/ege.html", bolum: "Tıp, Ziraat & Fen", kadro: "%91 Tam Zamanlı", urap: "950", qs: "1001-1200", the: "1001-1200" },
+    { id: 15, isim: "Dokuz Eylül Üniversitesi", universiteLink: "universiteler/deu.html", bolum: "Tıp, Mühendislik & Hukuk", kadro: "%88 Tam Zamanlı", urap: "1150", qs: "1201-1400", the: "1201-1500" },
+    { id: 16, isim: "İzmir Yüksek Teknoloji Enstitüsü (İYTE)", universiteLink: "universiteler/iyte.html", bolum: "Mimarlık & İleri Teknoloji", kadro: "%84 Tam Zamanlı", urap: "1450", qs: "1201-1400", the: "Listelenmiyor" },
+    { id: 17, isim: "Erciyes Üniversitesi (Kayseri)", universiteLink: "universiteler/erciyes.html", bolum: "Tıp & Mühendislik", kadro: "%86 Tam Zamanlı", urap: "1100", qs: "1201-1400", the: "1001-1200" },
+    { id: 18, isim: "Karadeniz Teknik Üniversitesi (Trabzon)", universiteLink: "universiteler/ktu.html", bolum: "Mühendislik & Orman", kadro: "%87 Tam Zamanlı", urap: "1300", qs: "Listelenmiyor", the: "1501+" },
+    { id: 19, isim: "Çukurova Üniversitesi (Adana)", universiteLink: "universiteler/cukurova.html", bolum: "Ziraat, Tıp & Mühendislik", kadro: "%88 Tam Zamanlı", urap: "1250", qs: "1201-1400", the: "1201-1500" },
+    { id: 20, isim: "Akdeniz Üniversitesi (Antalya)", universiteLink: "universiteler/akdeniz.html", bolum: "Tıp & Turizm", kadro: "%85 Tam Zamanlı", urap: "1200", qs: "1201-1400", the: "1501+" },
+    { id: 21, isim: "Anadolu Üniversitesi (Eskişehir)", universiteLink: "universiteler/anadolu.html", bolum: "İletişim, Havacılık & AÖF", kadro: "%80 Tam Zamanlı", urap: "1600", qs: "1201-1400", the: "1201-1500" },
+    { id: 22, isim: "Atatürk Üniversitesi (Erzurum)", universiteLink: "universiteler/ataturk.html", bolum: "Genel Kapsamlı (Tıp/Ziraat)", kadro: "%90 Tam Zamanlı", urap: "1350", qs: "Listelenmiyor", the: "1501+" },
+    { id: 23, isim: "Ondokuz Mayıs Üniversitesi (Samsun)", universiteLink: "universiteler/omu.html", bolum: "Tıp, Eğitim & Ziraat", kadro: "%86 Tam Zamanlı", urap: "1400", qs: "1401+", the: "1501+" },
+    { id: 24, isim: "Gebze Teknik Üniversitesi (Kocaeli)", universiteLink: "universiteler/gtu.html", bolum: "İleri Mühendislik & Temel Bil.", kadro: "%82 Tam Zamanlı", urap: "1500", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 25, isim: "Çanakkale Onsekiz Mart Üniversitesi", universiteLink: "universiteler/comu.html", bolum: "Arkeoloji, Tarih & Ziraat", kadro: "%84 Tam Zamanlı", urap: "1652", qs: "Listelenmiyor", the: "Listelenmiyor" }
+];

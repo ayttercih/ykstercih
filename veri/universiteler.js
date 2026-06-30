@@ -1,5 +1,6 @@
-// TÜRKİYE'NİN LOKOMOTİF 25 ÜNİVERSİTESİ (VERİ TABANI)
+// YKS TERCİH 2026 - LİYAKAT MOTORU VERİ TABANI
 const universiteVerileri = [
+    // --- 1. FAZ: ANKARA, İSTANBUL, İZMİR LOKOMOTİFLERİ ---
     { id: 1, isim: "Orta Doğu Teknik Üniversitesi (ODTÜ)", universiteLink: "universiteler/odtu.html", bolum: "Mühendislik & Temel Bilimler", kadro: "%95 Tam Zamanlı", urap: "431", qs: "285", the: "351-400" },
     { id: 2, isim: "Hacettepe Üniversitesi", universiteLink: "universiteler/hacettepe.html", bolum: "Tıp & Sağlık Bilimleri", kadro: "%98 Tam Zamanlı", urap: "524", qs: "751-800", the: "601-800" },
     { id: 3, isim: "Ankara Üniversitesi", universiteLink: "universiteler/ankara-uni.html", bolum: "Hukuk, Tıp & Sosyal Bil.", kadro: "%90 Tam Zamanlı", urap: "782", qs: "801-850", the: "801-1000" },
@@ -16,6 +17,8 @@ const universiteVerileri = [
     { id: 14, isim: "Ege Üniversitesi", universiteLink: "universiteler/ege.html", bolum: "Tıp, Ziraat & Fen", kadro: "%91 Tam Zamanlı", urap: "950", qs: "1001-1200", the: "1001-1200" },
     { id: 15, isim: "Dokuz Eylül Üniversitesi", universiteLink: "universiteler/deu.html", bolum: "Tıp, Mühendislik & Hukuk", kadro: "%88 Tam Zamanlı", urap: "1150", qs: "1201-1400", the: "1201-1500" },
     { id: 16, isim: "İzmir Yüksek Teknoloji Enstitüsü (İYTE)", universiteLink: "universiteler/iyte.html", bolum: "Mimarlık & İleri Teknoloji", kadro: "%84 Tam Zamanlı", urap: "1450", qs: "1201-1400", the: "Listelenmiyor" },
+
+    // --- 2. FAZ: ANADOLU'NUN KÖKLÜ DEVLETLERİ ---
     { id: 17, isim: "Erciyes Üniversitesi (Kayseri)", universiteLink: "universiteler/erciyes.html", bolum: "Tıp & Mühendislik", kadro: "%86 Tam Zamanlı", urap: "1100", qs: "1201-1400", the: "1001-1200" },
     { id: 18, isim: "Karadeniz Teknik Üniversitesi (Trabzon)", universiteLink: "universiteler/ktu.html", bolum: "Mühendislik & Orman", kadro: "%87 Tam Zamanlı", urap: "1300", qs: "Listelenmiyor", the: "1501+" },
     { id: 19, isim: "Çukurova Üniversitesi (Adana)", universiteLink: "universiteler/cukurova.html", bolum: "Ziraat, Tıp & Mühendislik", kadro: "%88 Tam Zamanlı", urap: "1250", qs: "1201-1400", the: "1201-1500" },
@@ -24,5 +27,27 @@ const universiteVerileri = [
     { id: 22, isim: "Atatürk Üniversitesi (Erzurum)", universiteLink: "universiteler/ataturk.html", bolum: "Genel Kapsamlı (Tıp/Ziraat)", kadro: "%90 Tam Zamanlı", urap: "1350", qs: "Listelenmiyor", the: "1501+" },
     { id: 23, isim: "Ondokuz Mayıs Üniversitesi (Samsun)", universiteLink: "universiteler/omu.html", bolum: "Tıp, Eğitim & Ziraat", kadro: "%86 Tam Zamanlı", urap: "1400", qs: "1401+", the: "1501+" },
     { id: 24, isim: "Gebze Teknik Üniversitesi (Kocaeli)", universiteLink: "universiteler/gtu.html", bolum: "İleri Mühendislik & Temel Bil.", kadro: "%82 Tam Zamanlı", urap: "1500", qs: "Listelenmiyor", the: "Listelenmiyor" },
-    { id: 25, isim: "Çanakkale Onsekiz Mart Üniversitesi", universiteLink: "universiteler/comu.html", bolum: "Arkeoloji, Tarih & Ziraat", kadro: "%84 Tam Zamanlı", urap: "1652", qs: "Listelenmiyor", the: "Listelenmiyor" }
+    { id: 25, isim: "Çanakkale Onsekiz Mart Üniversitesi", universiteLink: "universiteler/comu.html", bolum: "Arkeoloji, Tarih & Ziraat", kadro: "%84 Tam Zamanlı", urap: "1652", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 26, isim: "Bursa Uludağ Üniversitesi", universiteLink: "universiteler/uludag.html", bolum: "Tıp, Otomotiv & İktisat", kadro: "%86 Tam Zamanlı", urap: "1450", qs: "Listelenmiyor", the: "1501+" },
+    { id: 27, isim: "Sakarya Üniversitesi", universiteLink: "universiteler/sakarya.html", bolum: "Mühendislik & İdari Bilimler", kadro: "%83 Tam Zamanlı", urap: "1520", qs: "1201-1400", the: "1501+" },
+    { id: 28, isim: "Kocaeli Üniversitesi", universiteLink: "universiteler/kocaeli.html", bolum: "Mühendislik & Tıp", kadro: "%84 Tam Zamanlı", urap: "1580", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 29, isim: "Süleyman Demirel Üniversitesi (Isparta)", universiteLink: "universiteler/sdu.html", bolum: "Tıp & Diş Hekimliği", kadro: "%85 Tam Zamanlı", urap: "1650", qs: "Listelenmiyor", the: "1501+" },
+    { id: 30, isim: "Selçuk Üniversitesi (Konya)", universiteLink: "universiteler/selcuk.html", bolum: "Veterinerlik, Hukuk & Diş", kadro: "%87 Tam Zamanlı", urap: "1380", qs: "Listelenmiyor", the: "1501+" },
+    { id: 31, isim: "Gaziantep Üniversitesi", universiteLink: "universiteler/gaziantep.html", bolum: "Mühendislik & Tıp", kadro: "%82 Tam Zamanlı", urap: "1720", qs: "Listelenmiyor", the: "1501+" },
+    { id: 32, isim: "Dicle Üniversitesi (Diyarbakır)", universiteLink: "universiteler/dicle.html", bolum: "Tıp & Ziraat", kadro: "%81 Tam Zamanlı", urap: "1850", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 33, isim: "Fırat Üniversitesi (Elazığ)", universiteLink: "universiteler/firat.html", bolum: "Mühendislik & Teknoloji", kadro: "%88 Tam Zamanlı", urap: "1280", qs: "Listelenmiyor", the: "1201-1500" },
+    { id: 34, isim: "İnönü Üniversitesi (Malatya)", universiteLink: "universiteler/inonu.html", bolum: "Tıp (Karaciğer Nakli Enstitüsü)", kadro: "%85 Tam Zamanlı", urap: "1480", qs: "Listelenmiyor", the: "Listelenmiyor" },
+
+    // --- 3. FAZ: BÜYÜK VAKIF ÜNİVERSİTELERİ ---
+    { id: 35, isim: "Başkent Üniversitesi (Ankara)", universiteLink: "universiteler/baskent.html", bolum: "Tıp, Diş & Hukuk", kadro: "%80 Tam Zamanlı", urap: "1920", qs: "Listelenmiyor", the: "1501+" },
+    { id: 36, isim: "Çankaya Üniversitesi (Ankara)", universiteLink: "universiteler/cankaya.html", bolum: "Mühendislik & Hukuk", kadro: "%75 Tam Zamanlı", urap: "1850", qs: "Listelenmiyor", the: "401-500" },
+    { id: 37, isim: "Yeditepe Üniversitesi (İstanbul)", universiteLink: "universiteler/yeditepe.html", bolum: "Tıp, Diş & Eczacılık", kadro: "%78 Tam Zamanlı", urap: "1980", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 38, isim: "Bahçeşehir Üniversitesi (BAU)", universiteLink: "universiteler/bau.html", bolum: "İletişim, Hukuk & Mühendislik", kadro: "%72 Tam Zamanlı", urap: "1950", qs: "Listelenmiyor", the: "1201-1500" },
+    { id: 39, isim: "Özyeğin Üniversitesi (İstanbul)", universiteLink: "universiteler/ozyegin.html", bolum: "İşletme, Hukuk & Mimarlık", kadro: "%85 Tam Zamanlı", urap: "2100", qs: "Listelenmiyor", the: "801-1000" },
+    { id: 40, isim: "Medipol Üniversitesi (İstanbul)", universiteLink: "universiteler/medipol.html", bolum: "Tıp, Diş & Sağlık Bilimleri", kadro: "%70 Tam Zamanlı", urap: "2200", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 41, isim: "Acıbadem Üniversitesi (İstanbul)", universiteLink: "universiteler/acibadem.html", bolum: "Tıp & Sağlık Bilimleri", kadro: "%82 Tam Zamanlı", urap: "2050", qs: "Listelenmiyor", the: "1501+" },
+    { id: 42, isim: "Bezmiâlem Vakıf Üniversitesi", universiteLink: "universiteler/bezmialem.html", bolum: "Tıp, Diş Hekimliği & Eczacılık", kadro: "%88 Tam Zamanlı", urap: "1890", qs: "Listelenmiyor", the: "1501+" },
+    { id: 43, isim: "Kadir Has Üniversitesi (İstanbul)", universiteLink: "universiteler/kadirhas.html", bolum: "İletişim, Sanat & Hukuk", kadro: "%75 Tam Zamanlı", urap: "2400", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 44, isim: "Yaşar Üniversitesi (İzmir)", universiteLink: "universiteler/yasar.html", bolum: "Sanat, Tasarım & İletişim", kadro: "%70 Tam Zamanlı", urap: "2500", qs: "Listelenmiyor", the: "Listelenmiyor" },
+    { id: 45, isim: "İzmir Ekonomi Üniversitesi", universiteLink: "universiteler/izmirekonomi.html", bolum: "İktisat & Lojistik", kadro: "%72 Tam Zamanlı", urap: "2350", qs: "Listelenmiyor", the: "Listelenmiyor" }
 ];

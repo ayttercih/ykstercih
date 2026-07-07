@@ -129,60 +129,58 @@
         <p>&copy; 2026 YKS Tercih</p>
     </footer>
 
-    <script src="veri/universiteler.js"></script>
+    <script src="universiteler.js" defer></script>
 
-    <script>
-        function motoruGosterGizle() {
-            const icerik = document.getElementById("motorIcerik");
-            const buton = document.getElementById("motorGosterButon");
-            
-            if (icerik.style.display === "none" || icerik.style.display === "") {
-                icerik.style.display = "block";
-                buton.innerHTML = "❌ Liyakat Motorunu Gizle";
-                buton.classList.add("acik");
-            } else {
-                icerik.style.display = "none";
-                buton.innerHTML = "🔍 Dünya Sıralamaları & Liyakat Motorunu Aç";
-                buton.classList.remove("acik");
-            }
-        }
+    <script defer>
+        // Tabloyu çizen ana fonksiyon
+        function tabloyuCiz(veriDizisi) {
+            const tabloGovdesi = document.querySelector("table tbody");
+            tabloGovdesi.innerHTML = ""; // Önceki sonuçları temizle
 
-        function veriFormatla(deger) { return deger === "Listelenmiyor" ? `<span class="listelenmiyor">Yok</span>` : `<strong>${deger}</strong>`; }
-
-        function tabloyuCiz(veriler) {
-            const tablo = document.getElementById("sonucTablosu");
-            tablo.innerHTML = "";
-            veriler.forEach(veri => {
-                tablo.innerHTML += `
+            veriDizisi.forEach(uni => {
+                let satir = `
                     <tr>
-                        <td><strong>${veri.isim}</strong></td>
-                        <td>${veri.bolum}</td>
                         <td>
-                            <div class="rank-kutu">
-                                <div class="rank-satir"><span class="rank-isim">URAP:</span> ${veriFormatla(veri.urap)}</div>
-                                <div class="rank-satir"><span class="rank-isim">QS:</span> ${veriFormatla(veri.qs)}</div>
-                                <div class="rank-satir"><span class="rank-isim">THE:</span> ${veriFormatla(veri.the)}</div>
-                            </div>
+                            <strong>${uni.isim}</strong><br>
+                            <span style="font-size: 0.8em; color: gray;">${uni.kadro}</span>
                         </td>
-                        <td style="font-weight:bold; color:#FF6B35;">${veri.kadro}</td>
-                        <td><a href="${veri.universiteLink}" class="detay-buton">Detaylar</a></td>
+                        <td>${uni.bolum}</td>
+                        <td>
+                            <span style="color:#0A2044; font-weight:bold;">URAP:</span> ${uni.urap}<br>
+                            <span style="color:#FF5722; font-weight:bold;">QS:</span> ${uni.qs}<br>
+                            <span style="color:#3A5A80; font-weight:bold;">THE:</span> ${uni.the}
+                        </td>
+                        <td>${uni.kadro}</td>
+                        <td>
+                            <a href="${uni.universiteLink}" class="btn btn-sm btn-primary" style="background-color: #FF5722; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px;">Detaylı İncele</a>
+                        </td>
                     </tr>
                 `;
+                tabloGovdesi.innerHTML += satir;
             });
         }
 
-        // AKILLI SIRALAMA ALGORİTMASI
+        // Sıralama için sayıya çevirme fonksiyonu (Zekice yazdığınız o kısım)
         function sayiyaCevir(deger) {
-            if (deger === "Listelenmiyor" || deger === "Yok") return 999999; // Yok olanları en sona atar
-            return parseInt(deger.split('-')[0].replace(/[^0-9]/g, '')); // "351-400" gibi aralıkların ilk sayısını alır
+            if (!deger || deger === "Listelenmiyor" || deger === "Yok" || deger === "Bilgi Yok") return 999999;
+            return parseInt(deger.split('-')[0].replace(/[^0-9]/g, ''));
         }
 
+        // Filtreleme ve Arama Motoru
         function sonuclariFiltrele() {
-            const arama = document.getElementById("aramaKutusu").value.toLowerCase();
-            const siralama = document.getElementById("siralamaKriteri").value;
+            // Arama kutusundaki metni al
+            const aramaKutusu = document.getElementById("aramaKutusu");
+            const arama = aramaKutusu ? aramaKutusu.value.toLowerCase() : "";
             
-            // 1. Önce İsme Göre Filtrele
-            let filtrelenmis = universiteVerileri.filter(v => v.isim.toLowerCase().includes(arama) || v.bolum.toLowerCase().includes(arama));
+            // Sıralama kriterini al
+            const siralamaKutusu = document.getElementById("siralamaKriteri");
+            const siralama = siralamaKutusu ? siralamaKutusu.value : "varsayilan";
+            
+            // 1. Önce İsme veya Bölüme Göre Filtrele
+            let filtrelenmis = universiteVerileri.filter(v => 
+                (v.isim && v.isim.toLowerCase().includes(arama)) || 
+                (v.bolum && v.bolum.toLowerCase().includes(arama))
+            );
 
             // 2. Sonra Seçilen Kritere Göre Sırala
             if (siralama === "urap") {
@@ -193,11 +191,18 @@
                 filtrelenmis.sort((a, b) => sayiyaCevir(a.the) - sayiyaCevir(b.the));
             }
 
+            // 3. Sonuçları Ekrana Bas
             tabloyuCiz(filtrelenmis);
         }
 
+        // DOM (Sayfa) tamamen yüklendiğinde motoru ilk kez çalıştır
         document.addEventListener("DOMContentLoaded", () => {
-            tabloyuCiz(universiteVerileri);
+            // universiteVerileri dizisi yüklendi mi kontrol et
+            if (typeof universiteVerileri !== 'undefined') {
+                tabloyuCiz(universiteVerileri);
+            } else {
+                console.error("HATA: universiteVerileri dizisi bulunamadı! universiteler.js dosya yolunu kontrol edin.");
+            }
         });
     </script>
 </body>

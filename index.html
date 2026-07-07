@@ -161,6 +161,17 @@
         }
 
         // Sıralama için sayıya çevirme fonksiyonu (Zekice yazdığınız o kısım)
+        ///////////////////////////////////////////
+// Motoru Aç/Kapat Butonunun Fonksiyonu (Eksik olan parça)
+        function motoruGosterGizle() {
+            const motorAlani = document.getElementById("motorIcerik");
+            if (motorAlani.style.display === "none" || motorAlani.style.display === "") {
+                motorAlani.style.display = "block";
+            } else {
+                motorAlani.style.display = "none";
+            }
+        }
+        ///////////////////////////////////////////
         function sayiyaCevir(deger) {
             if (!deger || deger === "Listelenmiyor" || deger === "Yok" || deger === "Bilgi Yok") return 999999;
             return parseInt(deger.split('-')[0].replace(/[^0-9]/g, ''));

@@ -7,40 +7,59 @@
     
     <style>
         /* GENEL YAPI */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background-color: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background-color: #f4f7f6; max-width: 1200px; margin-left: auto; margin-right: auto;}
         
+        /* ÜST BUTONLAR VE BAŞLIK */
+        header { text-align: center; margin-bottom: 30px; }
+        .uyari-bandi { background-color: #FFC107; padding: 10px; border-radius: 5px; font-weight: bold; margin-bottom: 20px; color: #0A2044; }
+        .ana-baslik { color: #0A2044; font-size: 2.5rem; margin-bottom: 5px; font-weight: 900; }
+        .alt-baslik { color: #666; margin-top: 0; margin-bottom: 30px; }
+        .yonlendirme-butonlari { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+        .btn-yonlendirme { background-color: #0A2044; color: white; padding: 15px 30px; text-decoration: none; font-size: 1.2rem; border-radius: 8px; font-weight: bold; transition: 0.3s; border: 2px solid #0A2044; }
+        .btn-yonlendirme:hover { background-color: white; color: #0A2044; }
+        .btn-motor-ac { background-color: #FF5722; color: white; border: none; padding: 15px 40px; font-size: 1.3rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; width: 100%; max-width: 600px; }
+        .btn-motor-ac:hover { background-color: #0A2044; }
+
         /* FİLTRE VE ARAMA ALANI */
+        #motorIcerik { display: none; margin-top: 30px; animation: acilmaEfekti 0.4s ease-in-out; }
+        @keyframes acilmaEfekti { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .filtre-alani { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; background-color: #F8FAFC; padding: 20px; border-radius: 8px; border-left: 5px solid #FF5722; }
         .filtre-alani input, .filtre-alani select { padding: 12px; border: 2px solid #0A2044; border-radius: 6px; font-size: 1rem; flex: 1; min-width: 200px; }
         .filtre-alani button { background-color: #FF5722; color: white; border: none; padding: 12px 25px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s;}
         .filtre-alani button:hover { background-color: #0A2044; }
 
-        /* TABLO TASARIMI (HİZALAMALAR BURADA) */
+        /* TABLO TASARIMI */
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         thead { background-color: #0A2044; color: white; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
         tr:hover { background-color: #f1f5f9; }
 
-        /* DETAYLI İNCELE BUTONU (YENİ) */
-        .btn-detay {
-            display: inline-flex; align-items: center; justify-content: center;
-            background-color: #0A2044; color: #FFC107;
-            padding: 8px 16px; font-size: 0.9rem; font-weight: bold;
-            text-decoration: none; border-radius: 6px;
-            transition: all 0.3s ease; border: 1px solid #0A2044;
-            min-width: 100px;
-        }
-        .btn-detay:hover {
-            background-color: #FF5722; color: #ffffff;
-            border-color: #FF5722; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
-            transform: translateY(-2px);
-        }
+        /* DETAYLI İNCELE BUTONU */
+        .btn-detay { display: inline-flex; align-items: center; justify-content: center; background-color: #0A2044; color: #FFC107; padding: 8px 16px; font-size: 0.9rem; font-weight: bold; text-decoration: none; border-radius: 6px; transition: all 0.3s ease; border: 1px solid #0A2044; min-width: 100px; }
+        .btn-detay:hover { background-color: #FF5722; color: #ffffff; border-color: #FF5722; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transform: translateY(-2px); }
     </style>
 </head>
 <body>
 
-    <div id="motorIcerik">
+    <header>
+        <div class="uyari-bandi">
+            ⚠️ Liyakat ve Objektif Metriklere Dayalı YKS Tercih Rehberimiz Yayında!
+        </div>
         
+        <h1 class="ana-baslik">YKS TERCİH 2026</h1>
+        <h3 class="alt-baslik">Türkiye'nin En Kapsamlı Üniversite ve Şehir Lojistik Rehberi</h3>
+        
+        <div class="yonlendirme-butonlari">
+            <a href="sehirler/index.html" class="btn-yonlendirme">📍 Şehir Rehberleri</a>
+            <a href="universiteler/index.html" class="btn-yonlendirme">🎓 Üniversite Rehberleri</a>
+        </div>
+
+        <button onclick="motoruGosterGizle()" class="btn-motor-ac">
+            🔍 Dünya Sıralamaları & Liyakat Motorunu Aç
+        </button>
+    </header>
+
+    <div id="motorIcerik">
         <div class="filtre-alani">
             <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ, Tıp)..." onkeyup="sonuclariFiltrele()">
             
@@ -77,6 +96,15 @@
     <script src="veri/universiteler.js" defer></script>
 
     <script defer>
+        function motoruGosterGizle() {
+            const motorAlani = document.getElementById("motorIcerik");
+            if (motorAlani.style.display === "none" || motorAlani.style.display === "") {
+                motorAlani.style.display = "block";
+            } else {
+                motorAlani.style.display = "none";
+            }
+        }
+
         function tabloyuCiz(veriDizisi) {
             const tabloGovdesi = document.querySelector("table tbody");
             if(!tabloGovdesi) return;

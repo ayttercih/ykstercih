@@ -58,6 +58,31 @@
 
         footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--acik-mavi); color: var(--gri-ton); font-weight: bold; }
         .beta-note { font-style: italic; color: var(--gri-ton); margin-top: 30px; text-align: center; }
+        //////////////////////////////////////////////////////////////////////////////////////////////
+/* DETAYLI İNCELE BUTONU ÖZEL TASARIMI */
+        .btn-detay {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #0A2044; /* Asil Lacivert */
+            color: #FFC107; /* Altın Sarısı */
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: 1px solid #0A2044;
+        }
+        .btn-detay:hover {
+            background-color: #FF5722; /* Vurgulu Turuncu */
+            color: #ffffff;
+            border-color: #FF5722;
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+            transform: translateY(-2px); /* Üzerine gelince hafif yukarı kalkar */
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
     </style>
 </head>
 <body>
@@ -152,7 +177,13 @@
                         </td>
                         <td>${uni.kadro}</td>
                         <td>
-                            <a href="${uni.universiteLink}" class="btn btn-sm btn-primary" style="background-color: #FF5722; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px;">Detaylı İncele</a>
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                          // Tabloyu çizen ana fonksiyonun içindeki ilgili satırı şu şekilde değiştirin:
+
+<td>
+    <a href="${uni.universiteLink}" class="btn-detay">İncele ➔</a>
+</td>
+                            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         </td>
                     </tr>
                 `;

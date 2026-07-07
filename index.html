@@ -3,162 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YKS Tercih Rehberi 2026 | Objektif Veri Motoru</title>
+    <title>YKS Tercih 2026 | Liyakat Motoru</title>
     
     <style>
-        :root {
-            --koyu-lacivert: #0A192F;
-            --canli-turuncu: #FF6B35;
-            --acik-mavi: #E8F1F2;
-            --beyaz: #FFFFFF;
-            --uyari-sarisi: #FFD166;
-            --gri-ton: #6c757d;
-            --golge-rengi: rgba(10, 25, 47, 0.15);
-        }
+        /* GENEL YAPI */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background-color: #f4f7f6; }
+        
+        /* FİLTRE VE ARAMA ALANI */
+        .filtre-alani { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; background-color: #F8FAFC; padding: 20px; border-radius: 8px; border-left: 5px solid #FF5722; }
+        .filtre-alani input, .filtre-alani select { padding: 12px; border: 2px solid #0A2044; border-radius: 6px; font-size: 1rem; flex: 1; min-width: 200px; }
+        .filtre-alani button { background-color: #FF5722; color: white; border: none; padding: 12px 25px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s;}
+        .filtre-alani button:hover { background-color: #0A2044; }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--acik-mavi); color: var(--koyu-lacivert); margin: 0; padding: 0; line-height: 1.6; }
-        .guncelleme-bandi { background-color: var(--uyari-sarisi); color: var(--koyu-lacivert); text-align: center; padding: 12px; font-weight: bold; font-size: 1.1rem; border-bottom: 3px solid var(--canli-turuncu); }
-        header { background-color: var(--koyu-lacivert); color: var(--beyaz); padding: 3rem 1rem; text-align: center; border-bottom: 5px solid var(--canli-turuncu); }
-        header h1 { margin: 0; font-size: 2.8rem; letter-spacing: 1px; }
-        header p { color: var(--acik-mavi); font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
-        .konteyner { max-width: 1100px; margin: 30px auto; padding: 30px; background-color: var(--beyaz); border-radius: 12px; box-shadow: 0 8px 25px var(--golge-rengi); }
+        /* TABLO TASARIMI (HİZALAMALAR BURADA) */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        thead { background-color: #0A2044; color: white; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        tr:hover { background-color: #f1f5f9; }
 
-        .hizli-erisim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
-        @media (max-width: 768px) { .hizli-erisim-grid { grid-template-columns: 1fr; } }
-        .nav-kart { background-color: var(--acik-mavi); padding: 30px; border-radius: 10px; text-align: center; text-decoration: none; color: var(--koyu-lacivert); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 2px solid transparent; }
-        .nav-kart:hover { transform: translateY(-5px); box-shadow: 0 10px 20px var(--golge-rengi); border-color: var(--canli-turuncu); }
-        .nav-buton { background-color: var(--koyu-lacivert); color: var(--beyaz); padding: 15px 30px; border-radius: 8px; font-size: 1.3rem; font-weight: bold; display: inline-block; margin-bottom: 15px; transition: 0.3s; }
-        .nav-kart:hover .nav-buton { background-color: var(--canli-turuncu); }
-        .nav-kart p { color: var(--gri-ton); font-size: 0.95rem; margin: 0; font-weight: bold; }
-        .ayirici { border: 0; height: 2px; background: var(--acik-mavi); margin: 40px 0; }
-
-        .motor-ac-buton { background-color: var(--canli-turuncu); color: var(--beyaz); width: 100%; padding: 18px; font-size: 1.4rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3); margin-bottom: 20px; }
-        .motor-ac-buton:hover { background-color: var(--koyu-lacivert); box-shadow: 0 5px 15px var(--golge-rengi); }
-        .motor-ac-buton.acik { background-color: var(--koyu-lacivert); border-left: 8px solid var(--canli-turuncu); }
-
-        #motorIcerik { display: none; margin-top: 20px; animation: yavascaAcil 0.4s ease-in-out; }
-        @keyframes yavascaAcil { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* YENİ FİLTRE VE SIRALAMA ALANI TASARIMI */
-        .filtre-alani { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; background-color: #F8FAFC; padding: 20px; border-radius: 8px; border-left: 5px solid var(--canli-turuncu); }
-        .filtre-alani input, .filtre-alani select { padding: 12px; border: 2px solid var(--koyu-lacivert); border-radius: 6px; font-size: 1rem; flex: 1; min-width: 200px; }
-        .filtre-alani button { background-color: var(--canli-turuncu); color: var(--beyaz); border: none; padding: 12px 25px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s;}
-        .filtre-alani button:hover { background-color: var(--koyu-lacivert); }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
-        th, td { padding: 15px; text-align: left; border-bottom: 2px solid var(--acik-mavi); }
-        th { background-color: var(--koyu-lacivert); color: var(--beyaz); }
-        tr:hover { background-color: #F0F4F8; }
-        .rank-kutu { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
-        .rank-satir { display: flex; justify-content: space-between; background-color: var(--acik-mavi); padding: 3px 6px; border-radius: 4px; }
-        .rank-isim { font-weight: bold; color: var(--koyu-lacivert); }
-        .listelenmiyor { color: var(--gri-ton); font-style: italic; }
-        .detay-buton { background-color: var(--acik-mavi); color: var(--koyu-lacivert); border: 2px solid var(--koyu-lacivert); padding: 6px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; text-decoration: none; display: inline-block; }
-        .detay-buton:hover { background-color: var(--koyu-lacivert); color: var(--beyaz); }
-
-        footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--acik-mavi); color: var(--gri-ton); font-weight: bold; }
-        .beta-note { font-style: italic; color: var(--gri-ton); margin-top: 30px; text-align: center; }
-/* DETAYLI İNCELE BUTONU ÖZEL TASARIMI */
+        /* DETAYLI İNCELE BUTONU (YENİ) */
         .btn-detay {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background-color: #0A2044; /* Asil Lacivert */
-            color: #FFC107; /* Altın Sarısı */
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            border: 1px solid #0A2044;
+            display: inline-flex; align-items: center; justify-content: center;
+            background-color: #0A2044; color: #FFC107;
+            padding: 8px 16px; font-size: 0.9rem; font-weight: bold;
+            text-decoration: none; border-radius: 6px;
+            transition: all 0.3s ease; border: 1px solid #0A2044;
+            min-width: 100px;
         }
         .btn-detay:hover {
-            background-color: #FF5722; /* Vurgulu Turuncu */
-            color: #ffffff;
-            border-color: #FF5722;
-            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
-            transform: translateY(-2px); /* Üzerine gelince hafif yukarı kalkar */
+            background-color: #FF5722; color: #ffffff;
+            border-color: #FF5722; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+            transform: translateY(-2px);
         }
-
     </style>
 </head>
 <body>
 
-    <div class="guncelleme-bandi">⚠️ Liyakat ve Objektif Metriklere Dayalı YKS Tercih Rehberimiz Yayında!</div>
+    <div id="motorIcerik">
+        
+        <div class="filtre-alani">
+            <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ, Tıp)..." onkeyup="sonuclariFiltrele()">
+            
+            <select id="siralamaKriteri" onchange="sonuclariFiltrele()">
+                <option value="varsayilan">Sıralama Ölçütü Seçin...</option>
+                <option value="urap">URAP'a Göre Sırala (En İyi)</option>
+                <option value="qs">QS'e Göre Sırala (En İyi)</option>
+                <option value="the">THE'ye Göre Sırala (En İyi)</option>
+            </select>
 
-    <header>
-        <h1>YKS TERCİH 2026</h1>
-        <p>Türkiye'nin En Kapsamlı Üniversite ve Şehir Lojistik Rehberi</p>
-    </header>
-
-    <div class="konteyner">
-        <div class="hizli-erisim-grid">
-            <a href="sehirler/index.html" class="nav-kart">
-                <div class="nav-buton">📍 Şehir Rehberleri</div>
-                <p>Tüm şehirlerin rehberi, her ilin en kapsamlı ve objektif bilgileri için tıklayın.</p>
-            </a>
-            <a href="universiteler/index.html" class="nav-kart">
-                <div class="nav-buton">🎓 Üniversite Rehberleri</div>
-                <p>200'den fazla üniversitenin detaylı kimlik kartlarını görmek için tıklayın.</p>
-            </a>
+            <button onclick="sonuclariFiltrele()">Filtrele</button>
         </div>
 
-        <hr class="ayirici">
-
-        <button id="motorGosterButon" class="motor-ac-buton" onclick="motoruGosterGizle()">
-            🔍 Dünya Sıralamaları & Liyakat Motorunu Aç
-        </button>
-
-        <div id="motorIcerik">
-            
-            <div class="filtre-alani">
-                <input type="text" id="aramaKutusu" placeholder="Üniversite veya Bölüm Ara (Örn: ODTÜ)..." onkeyup="sonuclariFiltrele()">
-                
-                <select id="siralamaKriteri" onchange="sonuclariFiltrele()">
-                    <option value="varsayilan">Sıralama Ölçütü Seçin...</option>
-                    <option value="urap">URAP'a Göre Sırala (En İyi)</option>
-                    <option value="qs">QS'e Göre Sırala (En İyi)</option>
-                    <option value="the">THE'ye Göre Sırala (En İyi)</option>
-                </select>
-
-                <button onclick="sonuclariFiltrele()">Filtrele</button>
-            </div>
-
-            <div style="overflow-x:auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Üniversite</th>
-                            <th>Bölüm / Alan</th>
-                            <th style="min-width: 280px;">
-                                Dünya Sıralaması<br>
-                                <span style="font-size:0.8rem; font-weight:normal; color:var(--uyari-sarisi);">*Dünyadaki ~30.000 üniversite içinden değerlendirilen havuzlar:</span><br>
-                                <span style="font-size:0.8rem; font-weight:normal; color:var(--acik-mavi);">URAP (İlk 3.000) &nbsp;|&nbsp; QS (İlk 1.500) &nbsp;|&nbsp; THE (İlk 1.900)</span>
-                            </th>
-                            <th>Akademik Kadro</th>
-                            <th>İşlem</th>
-                        </tr>
-                    </thead>
-                    <tbody id="sonucTablosu"></tbody>
-                </table>
-            </div>
-
-            <p class="beta-note">Projemiz sürekli olarak güncellenmektedir. Lojistik ve akademik kadro verileri eklendikçe motorumuz genişleyecektir.</p>
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Üniversite</th>
+                        <th style="width: 20%;">Bölüm / Alan</th>
+                        <th style="width: 25%;">
+                            Dünya Sıralaması <br>
+                            <span style="font-size: 0.8em; font-weight: normal;">URAP (İlk 3.000) &nbsp;|&nbsp; QS (İlk 1.500) &nbsp;|&nbsp; THE (İlk 1.900)</span>
+                        </th>
+                        <th style="width: 20%;">Akademik Kadro</th>
+                        <th style="width: 10%; text-align: center;">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2026 YKS Tercih</p>
-    </footer>
 
     <script src="veri/universiteler.js" defer></script>
 
     <script defer>
-        // Tabloyu çizen ana fonksiyon
         function tabloyuCiz(veriDizisi) {
             const tabloGovdesi = document.querySelector("table tbody");
-            tabloGovdesi.innerHTML = ""; // Önceki sonuçları temizle
+            if(!tabloGovdesi) return;
+            tabloGovdesi.innerHTML = ""; 
 
             veriDizisi.forEach(uni => {
                 let satir = `
@@ -174,13 +96,8 @@
                             <span style="color:#3A5A80; font-weight:bold;">THE:</span> ${uni.the}
                         </td>
                         <td>${uni.kadro}</td>
-                        <td>
-                      
-<td>
-    <td style="text-align: center; vertical-align: middle; width: 120px;">
-    <a href="${uni.universiteLink}" class="btn-detay">İncele ➔</a>
-</td>
-</td>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <a href="${uni.universiteLink}" class="btn-detay">İncele ➔</a>
                         </td>
                     </tr>
                 `;
@@ -188,40 +105,23 @@
             });
         }
 
-        // Sıralama için sayıya çevirme fonksiyonu (Zekice yazdığınız o kısım)
- 
-// Motoru Aç/Kapat Butonunun Fonksiyonu (Eksik olan parça)
-        function motoruGosterGizle() {
-            const motorAlani = document.getElementById("motorIcerik");
-            if (motorAlani.style.display === "none" || motorAlani.style.display === "") {
-                motorAlani.style.display = "block";
-            } else {
-                motorAlani.style.display = "none";
-            }
-        }
-    
         function sayiyaCevir(deger) {
             if (!deger || deger === "Listelenmiyor" || deger === "Yok" || deger === "Bilgi Yok") return 999999;
             return parseInt(deger.split('-')[0].replace(/[^0-9]/g, ''));
         }
 
-        // Filtreleme ve Arama Motoru
         function sonuclariFiltrele() {
-            // Arama kutusundaki metni al
             const aramaKutusu = document.getElementById("aramaKutusu");
             const arama = aramaKutusu ? aramaKutusu.value.toLowerCase() : "";
             
-            // Sıralama kriterini al
             const siralamaKutusu = document.getElementById("siralamaKriteri");
             const siralama = siralamaKutusu ? siralamaKutusu.value : "varsayilan";
             
-            // 1. Önce İsme veya Bölüme Göre Filtrele
             let filtrelenmis = universiteVerileri.filter(v => 
                 (v.isim && v.isim.toLowerCase().includes(arama)) || 
                 (v.bolum && v.bolum.toLowerCase().includes(arama))
             );
 
-            // 2. Sonra Seçilen Kritere Göre Sırala
             if (siralama === "urap") {
                 filtrelenmis.sort((a, b) => sayiyaCevir(a.urap) - sayiyaCevir(b.urap));
             } else if (siralama === "qs") {
@@ -230,17 +130,14 @@
                 filtrelenmis.sort((a, b) => sayiyaCevir(a.the) - sayiyaCevir(b.the));
             }
 
-            // 3. Sonuçları Ekrana Bas
             tabloyuCiz(filtrelenmis);
         }
 
-        // DOM (Sayfa) tamamen yüklendiğinde motoru ilk kez çalıştır
         document.addEventListener("DOMContentLoaded", () => {
-            // universiteVerileri dizisi yüklendi mi kontrol et
             if (typeof universiteVerileri !== 'undefined') {
                 tabloyuCiz(universiteVerileri);
             } else {
-                console.error("HATA: universiteVerileri dizisi bulunamadı! universiteler.js dosya yolunu kontrol edin.");
+                console.error("HATA: universiteVerileri dizisi bulunamadı!");
             }
         });
     </script>

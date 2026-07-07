@@ -58,7 +58,6 @@
 
         footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--acik-mavi); color: var(--gri-ton); font-weight: bold; }
         .beta-note { font-style: italic; color: var(--gri-ton); margin-top: 30px; text-align: center; }
-        //////////////////////////////////////////////////////////////////////////////////////////////
 /* DETAYLI İNCELE BUTONU ÖZEL TASARIMI */
         .btn-detay {
             display: inline-flex;
@@ -82,7 +81,6 @@
             transform: translateY(-2px); /* Üzerine gelince hafif yukarı kalkar */
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////
     </style>
 </head>
 <body>
@@ -177,13 +175,12 @@
                         </td>
                         <td>${uni.kadro}</td>
                         <td>
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      
                           // Tabloyu çizen ana fonksiyonun içindeki ilgili satırı şu şekilde değiştirin:
 
 <td>
     <a href="${uni.universiteLink}" class="btn-detay">İncele ➔</a>
 </td>
-                            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         </td>
                     </tr>
                 `;
@@ -192,7 +189,7 @@
         }
 
         // Sıralama için sayıya çevirme fonksiyonu (Zekice yazdığınız o kısım)
-        ///////////////////////////////////////////
+ 
 // Motoru Aç/Kapat Butonunun Fonksiyonu (Eksik olan parça)
         function motoruGosterGizle() {
             const motorAlani = document.getElementById("motorIcerik");
@@ -202,7 +199,7 @@
                 motorAlani.style.display = "none";
             }
         }
-        ///////////////////////////////////////////
+    
         function sayiyaCevir(deger) {
             if (!deger || deger === "Listelenmiyor" || deger === "Yok" || deger === "Bilgi Yok") return 999999;
             return parseInt(deger.split('-')[0].replace(/[^0-9]/g, ''));

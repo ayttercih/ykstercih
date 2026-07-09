@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Gül Üniversitesi (AGÜ) | Liyakat Motoru Detay Raporu</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background-color: #f4f7f6; max-width: 1200px; margin-left: auto; margin-right: auto;}
+        
+        /* ÜST BAŞLIK ALANI */
+        .uni-baslik-alani { background-color: #0A2044; color: white; padding: 40px 20px; text-align: center; border-radius: 10px; margin-bottom: 30px; border-bottom: 5px solid #FF5722; position: relative; }
+        .uni-isim { margin: 0; color: #FFC107; font-weight: 900; font-size: 2.2rem; }
+        .uni-ozet { margin-top: 10px; font-size: 1.1rem; opacity: 0.9; }
+        
+        .buton-grubu { margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .btn-link { display: inline-block; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+        .btn-geri { background-color: white; color: #0A2044; border: 2px solid white; }
+        .btn-geri:hover { background-color: #FF5722; color: white; border-color: #FF5722; }
+        .btn-kaynakca { background-color: #3A5A80; color: white; border: 2px solid #3A5A80; }
+        .btn-kaynakca:hover { background-color: #FFC107; color: #0A2044; border-color: #FFC107; }
+
+        /* DASHBOARD - 8 SÜTUNLU KART YAPISI */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        
+        .veri-karti { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #0A2044; transition: transform 0.3s ease; }
+        .veri-karti:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .karti-baslik { font-size: 1.1rem; color: #FF5722; margin-top: 0; margin-bottom: 15px; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        .veri-satiri { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; }
+        .veri-etiket { font-weight: 600; color: #555; }
+        .veri-deger { font-weight: bold; color: #0A2044; text-align: right; }
+        
+        /* EKONOMİK ŞEFFAFLIK ÖZEL VURGU */
+        .karti-ekonomi { border-top: 4px solid #FFC107; background-color: #FFFBED; }
+        .karti-ekonomi .karti-baslik { color: #0A2044; }
+        
+        .guncelleme-notu { text-align: center; font-size: 0.85rem; color: #888; margin-top: 40px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="uni-baslik-alani">
+        <h1 class="uni-isim">Abdullah Gül Üniversitesi (AGÜ)</h1>
+        <p class="uni-ozet">📍 Kayseri | 🏛️ Devlet Üniversitesi | 📅 Kuruluş: 2010</p>
+        
+        <div class="buton-grubu">
+            <a href="../index.html" class="btn-link btn-geri">⬅ Liyakat Motoruna Dön</a>
+            <a href="../kaynakca.html" class="btn-link btn-kaynakca">📚 Veri Kaynakçası</a>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="veri-karti">
+            <h3 class="karti-baslik">1. Küresel Sıralamalar</h3>
+            <div class="veri-satiri"><span class="veri-etiket">THE Dünya Sıralaması:</span> <span class="veri-deger">601-800 Bandı</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">URAP Dünya:</span> <span class="veri-deger">2150. Sıra</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">QS World:</span> <span class="veri-deger" style="color:gray;">Listelenmiyor</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Genel Çıkarım:</span> <span class="veri-deger" style="color:#28a745;">Genç yaşına rağmen saygın</span></div>
+        </div>
+
+        <div class="veri-karti">
+            <h3 class="karti-baslik">2. Kurumsal Akreditasyonlar</h3>
+            <div class="veri-satiri"><span class="veri-etiket">YÖKAK Kurumsal Onay:</span> <span class="veri-deger">Var (Koşullu)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">MÜDEK (Mühendislik):</span> <span class="veri-deger">Aktif (Tam Akredite)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">FEDEK (Fen-Edebiyat):</span> <span class="veri-deger">Süreç Devam Ediyor</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Eğitim Dili:</span> <span class="veri-deger">%100 İngilizce</span></div>
+        </div>
+
+        <div class="veri-karti">
+            <h3 class="karti-baslik">3. Akademik Kadro Gücü</h3>
+            <div class="veri-satiri"><span class="veri-etiket">Tam Zamanlı Oranı:</span> <span class="veri-deger">%96</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Aktif Hoca/Öğrenci Oranı:</span> <span class="veri-deger">1 / 14 (Butik Avantajı)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Q1/Q2 Yayın Endeksi:</span> <span class="veri-deger">Yüksek</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Yabancı Akademisyen:</span> <span class="veri-deger">%8 Oranında</span></div>
+        </div>
+
+        <div class="veri-karti">
+            <h3 class="karti-baslik">4. İstihdam & Takip</h3>
+            <div class="veri-satiri"><span class="veri-etiket">İlk 6 Ayda İşe Yerleşme:</span> <span class="veri-deger">%82</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Sektörel Talep:</span> <span class="veri-deger">Savunma & Yazılım</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Lisansüstü Eğitime Devam:</span> <span class="veri-deger">%25</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Yurt Dışı Kabul Oranı:</span> <span class="veri-deger">Ortalama Üstü</span></div>
+        </div>
+
+        <div class="veri-karti">
+            <h3 class="karti-baslik">5. Mezuniyet Verimliliği</h3>
+            <div class="veri-satiri"><span class="veri-etiket">Tam Vaktinde Mezuniyet:</span> <span class="veri-deger">%68</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Hazırlık Sınıfı Fire Oranı:</span> <span class="veri-deger">%18 (Zorlu Eğitim)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Bölüm Terk Oranı:</span> <span class="veri-deger">%14</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Verimlilik Analizi:</span> <span class="veri-deger">Zorlayıcı / Seçici</span></div>
+        </div>
+
+        <div class="veri-karti">
+            <h3 class="karti-baslik">6. Bilimsel Altyapı</h3>
+            <div class="veri-satiri"><span class="veri-etiket">Kütüphane Çalışma Saati:</span> <span class="veri-deger">7/24 Açık (Sümer Kampüs)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Öğrenci Başına Kaynak:</span> <span class="veri-deger">14 Basılı/Dijital Eser</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Öğrenci Başına Lab:</span> <span class="veri-deger">Yüksek (Mühendislik)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Teknokent Bağlantısı:</span> <span class="veri-deger">Erciyes Teknopark ile Ortak</span></div>
+        </div>
+
+        <div class="veri-karti">
+            <h3 class="karti-baslik">7. Kampüs Lojistiği</h3>
+            <div class="veri-satiri"><span class="veri-etiket">Kampüs Tipi:</span> <span class="veri-deger">Tarihi Fabrika Dönüşümü</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Şehir İçi Ulaşım:</span> <span class="veri-deger">Tramvay Bağlantılı</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">KYK Yurt Kapasitesi:</span> <span class="veri-deger">Yüksek (Barınma Sorunu Az)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Kayseri Yaşam Maliyeti:</span> <span class="veri-deger">Türkiye Ortalamasında</span></div>
+        </div>
+
+        <div class="veri-karti karti-ekonomi">
+            <h3 class="karti-baslik">8. Ekonomik Şeffaflık & Ar-Ge</h3>
+            <div class="veri-satiri"><span class="veri-etiket">Finansman Türü:</span> <span class="veri-deger">Devlet ve AGÜ Vakfı Desteği</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Ar-Ge'ye Ayrılan Pay:</span> <span class="veri-deger">%12 (Devlet Ort. Üstünde)</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Öğrenci Burs/Destekleri:</span> <span class="veri-deger">Vakıf Üzerinden Aktif</span></div>
+            <div class="veri-satiri"><span class="veri-etiket">Ağırlıklı Gider Kalemi:</span> <span class="veri-deger">%72 Personel, %15 Ar-Ge</span></div>
+        </div>
+
+    </div>
+
+    <p class="guncelleme-notu">Bu sayfadaki veriler YÖK Atlas 2024, Üniversite İdare Faaliyet Raporları ve Uluslararası Sıralama Kuruluşlarının resmi kayıtlarından objektif bir biçimde derlenmiştir.</p>
+
+</body>
+</html>

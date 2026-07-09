@@ -52,6 +52,7 @@
         <div class="yonlendirme-butonlari">
             <a href="sehirler/index.html" class="btn-yonlendirme">📍 Şehir Rehberleri</a>
             <a href="universiteler/index.html" class="btn-yonlendirme">🎓 Üniversite Rehberleri</a>
+            <a href="kaynakca.html" class="btn-yonlendirme" style="background-color: #3A5A80; border-color: #3A5A80;">📚 Kaynakça</a>
         </div>
 
         <button onclick="motoruGosterGizle()" class="btn-motor-ac">
@@ -93,7 +94,7 @@
         </div>
     </div>
 
-    <script src="veri/universiteler.js" defer></script>
+    <script src="veri/universiteler.js?v=3" defer></script>
 
     <script defer>
         function motoruGosterGizle() {
@@ -114,8 +115,7 @@
                 let satir = `
                     <tr>
                         <td>
-                            <strong>${uni.isim}</strong><br>
-                            <span style="font-size: 0.8em; color: gray;">${uni.kadro}</span>
+                            <strong>${uni.isim}</strong>
                         </td>
                         <td>${uni.bolum}</td>
                         <td>
